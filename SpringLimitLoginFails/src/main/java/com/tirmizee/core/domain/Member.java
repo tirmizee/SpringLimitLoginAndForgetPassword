@@ -20,6 +20,8 @@ public class Member implements Persistable<String>{
 	private Boolean accountNonLocked;
 	private Boolean accountNonExpired;
 	private Boolean credentialsNonExpired;
+	private Boolean initialLogin;
+ 	private String initialLoginToken;
 	private Timestamp createDate;
 	private Timestamp updateDate;
 	
@@ -103,6 +105,22 @@ public class Member implements Persistable<String>{
 
 	public void setCredentialsNonExpired(Boolean credentialsNonExpired) {
 		this.credentialsNonExpired = credentialsNonExpired;
+	}
+	
+	public Boolean getInitialLogin() {
+		return initialLogin;
+	}
+
+	public void setInitialLogin(Boolean initialLogin) {
+		this.initialLogin = initialLogin;
+	}
+	
+	public String getInitialLoginToken() {
+		return initialLoginToken;
+	}
+
+	public void setInitialLoginToken(String initialLoginToken) {
+		this.initialLoginToken = initialLoginToken;
 	}
 
 	public Timestamp getCreateDate() {

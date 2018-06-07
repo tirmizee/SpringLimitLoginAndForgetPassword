@@ -64,7 +64,7 @@ var Swal = {
 			   title : title, 
 			   text  : text, 
 			   showConfirmButton : false, 
-			   timer: 2000  });
+			   timer: 3000  });
 	},
 	Error : function(title,text) {
 		swal({ type  : 'warning', 

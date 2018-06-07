@@ -18,7 +18,7 @@ import com.tirmizee.backend.api.password.data.ResetPasswordDTO;
 import com.tirmizee.backend.dao.ForgetPasswordDao;
 import com.tirmizee.backend.dao.MemberAttemptDao;
 import com.tirmizee.backend.dao.MemberDao;
-import com.tirmizee.backend.service.data.MailInfo;
+import com.tirmizee.backend.service.data.SampleMailInfo;
 import com.tirmizee.core.component.TemplateUtils;
 import com.tirmizee.core.domain.ForgetPassword;
 import com.tirmizee.core.domain.Member;
@@ -86,7 +86,7 @@ public class ForgetPasswordServiceImpl implements ForgetPasswordService{
 			throw new BussinesException(HttpStatus.NOT_FOUND,"Not Found");
 		}
 		
-		if (!resetDTO.getPassword().equals(resetDTO.getConfirmPassword())) {
+		if (!resetDTO.isPasswordsEqualConstraint()) {
 			throw new BussinesException(HttpStatus.BAD_REQUEST,"Bad Request");
 		}
 		
@@ -134,7 +134,7 @@ public class ForgetPasswordServiceImpl implements ForgetPasswordService{
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("url", getUrl(token));
 		
-		MailInfo info = new MailInfo();
+		SampleMailInfo info = new SampleMailInfo();
 		info.setDate(new Date());
 		info.setFrom("tirmizee@com");
 		info.setTo("pratyay@generali.co.th");

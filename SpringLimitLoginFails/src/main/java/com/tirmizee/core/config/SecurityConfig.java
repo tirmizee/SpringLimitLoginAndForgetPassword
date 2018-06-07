@@ -19,8 +19,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.tirmizee.backend.dao.MemberDao;
 import com.tirmizee.backend.dao.PermissionDao;
-import com.tirmizee.core.security.AuthSuccessHandlerImpl;
-import com.tirmizee.core.security.LimitLoginAuthenticationProvider;
+import com.tirmizee.core.security.AuthenticationFailureHandlerImpl;
+import com.tirmizee.core.security.AuthenticationSuccessHandlerImpl;
+import com.tirmizee.core.security.DaoAuthenticationProviderImpl;
 import com.tirmizee.core.security.UserDetailsServiceImpl;
 
 @Configuration
@@ -29,13 +30,16 @@ import com.tirmizee.core.security.UserDetailsServiceImpl;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	MemberDao memberDao;
+	private MemberDao memberDao;
 	
 	@Autowired 
-	PermissionDao permissionDao;
+	private PermissionDao permissionDao;
 	
 	@Autowired
-	AuthSuccessHandlerImpl successHandler;
+	private AuthenticationSuccessHandlerImpl successHandler;
+	
+	@Autowired
+	private AuthenticationFailureHandlerImpl failureHandler;
 	
 	@Bean
 	public PasswordEncoder passwordEncoder(){
@@ -44,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
-	    DaoAuthenticationProvider authProvider = new LimitLoginAuthenticationProvider();
+	    DaoAuthenticationProvider authProvider = new DaoAuthenticationProviderImpl();
 	    authProvider.setHideUserNotFoundExceptions(false);
 	    authProvider.setUserDetailsService(userDetailsService());
 	    authProvider.setPasswordEncoder(passwordEncoder());
@@ -76,14 +80,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.csrf().disable()
 			.authorizeRequests()
-				.antMatchers( "/ForgetPassword",
+				.antMatchers( "/login",
+							  "/ForgetPassword",
 							  "/api/password/forget",
 							  "/api/password/reset",
+							  "/api/password/forceChange",
 							  "/ResetPassword/**").permitAll()
 				.anyRequest().authenticated()
 			.and()
 		    .formLogin().loginPage("/login").permitAll()
 		    	.successHandler(successHandler)
+		    	.failureHandler(failureHandler)
 		    .and()
 		    .sessionManagement()
 			    .maximumSessions(1)

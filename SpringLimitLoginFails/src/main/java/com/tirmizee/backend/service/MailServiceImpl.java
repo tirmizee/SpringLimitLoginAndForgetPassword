@@ -8,10 +8,10 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
-import com.tirmizee.backend.service.data.MailInfo;
+import com.tirmizee.backend.service.data.SampleMailInfo;
 
 @Service("MailService")
-public class MailServiceImpl  implements MailService{
+public class MailServiceImpl implements MailService{
 	
 	public static final String ENCODE_UTF8 = "utf-8";
 	
@@ -19,7 +19,7 @@ public class MailServiceImpl  implements MailService{
 	JavaMailSenderImpl mailSender;
 
 	@Override
-	public void send(MailInfo mailInfo)  {
+	public void send(SampleMailInfo mailInfo)  {
 		MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper;
 		try {

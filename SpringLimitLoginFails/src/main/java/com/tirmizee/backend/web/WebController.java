@@ -6,22 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tirmizee.backend.dao.ForgetPasswordDao;
 import com.tirmizee.backend.service.ForgetPasswordService;
 import com.tirmizee.core.exception.UrlNotFoundException;
-import com.tirmizee.core.security.AuthenticationMessages;
 
 @Controller
 public class WebController {
-	
-	@Autowired
-	private HttpServletRequest httpServletRequest;
-	
-	@Autowired
-	private AuthenticationMessages authMessages;
 	
 	@Autowired
 	private ForgetPasswordDao forgetPasswordDao;
@@ -38,7 +32,7 @@ public class WebController {
 	public ModelAndView login(@RequestParam(required = false) String error){
         ModelAndView model = new ModelAndView("index");
 		if (error != null) {
-			model.addObject("error", authMessages.getLastError(httpServletRequest));
+			model.addObject("error",error);
 		}
 		return model;
 	}
@@ -46,6 +40,11 @@ public class WebController {
 	@GetMapping(path = "/main")
 	public ModelAndView main(){
 		return new ModelAndView("pages/main");
+	}
+	
+	@PostMapping(path = "/ForcePasswordChange")
+	public ModelAndView forcePasswordChange(HttpServletRequest request){
+		return new ModelAndView("pages/forcePasswordChange");
 	}
 	
 	@GetMapping(path = "/ForgetPassword")

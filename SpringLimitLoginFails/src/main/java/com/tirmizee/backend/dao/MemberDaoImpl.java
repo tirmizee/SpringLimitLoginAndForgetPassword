@@ -51,5 +51,19 @@ public class MemberDaoImpl extends MemberRepositoryImpl implements MemberDao{
 		}
 	}
 
+	@Override
+	public Member findFirstLogin(String username, String initToken) {
+		StringBuilder select = new StringBuilder()
+				.append("SELECT * FROM ").append(TABLE_MEMBER)
+				.append(" WHERE ").append(COL_USERNAME).append(" = ? ")
+				.append(" AND ").append(COL_INITIALLOGINTOKEN).append(" = ? ")
+				.append(" AND ").append(COL_INITIALLOGIN).append(" = 1 ");
+		try {
+			return getJdbcOps().queryForObject(select.toString(), new Object[]{username,initToken}, ROW_MAPPER);
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+
 	
 }

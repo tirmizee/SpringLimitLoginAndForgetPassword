@@ -38,7 +38,14 @@ public class MemberAttemptServiceImpl implements MemberAttemptService{
 	
 	@Override
 	public void updateMemberAttempt(final String username) {
-		final MemberAttempt attempt = memberAttemptDao.findByUsername(username);
+		
+		MemberAttempt attempt = memberAttemptDao.findByUsername(username);
+		if (attempt == null) {
+			attempt = new MemberAttempt();
+			attempt.setUsername(username);
+			attempt.setAttempts(0);
+		}
+		
 		final int attemps = attempt.getAttempts();
 		attempt.setAttempts(plusOne(attemps));
 		attempt.setLastModified(getCurrentTimestamp());
@@ -49,6 +56,7 @@ public class MemberAttemptServiceImpl implements MemberAttemptService{
 			member.setAccountNonLocked(false);
 			memberDao.save(member);
 		}
+		
 	}
 	
 	private int plusOne(int attempts){

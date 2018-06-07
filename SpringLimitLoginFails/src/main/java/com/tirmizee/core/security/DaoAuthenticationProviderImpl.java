@@ -9,10 +9,11 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.tirmizee.backend.service.MemberAttemptService;
+import com.tirmizee.core.exception.EnforcePasswordFirstloginException;
 
-public class LimitLoginAuthenticationProvider extends DaoAuthenticationProvider {
+public class DaoAuthenticationProviderImpl extends DaoAuthenticationProvider {
 	
-	public static final Logger LOG = Logger.getLogger(LimitLoginAuthenticationProvider.class);
+	public static final Logger LOG = Logger.getLogger(DaoAuthenticationProviderImpl.class);
 	
 	@Autowired
 	private MemberAttemptService memberAttemptService;
@@ -20,8 +21,13 @@ public class LimitLoginAuthenticationProvider extends DaoAuthenticationProvider 
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		final String username = authentication.getName();
+		UserProfile userProfile;
 		try{
 			Authentication authen = super.authenticate(authentication);
+			userProfile =  (UserProfile) authen.getPrincipal();
+			if (userProfile.isInitialLogin()) {
+				throw new EnforcePasswordFirstloginException( username ,userProfile.getInitialLoginToken() , "Force password change");
+			}
 			if (authen.isAuthenticated()) {
 				memberAttemptService.resetMemberAttempt(username);
 			}
@@ -33,6 +39,6 @@ public class LimitLoginAuthenticationProvider extends DaoAuthenticationProvider 
 			throw new BadCredentialsException(username);
 		}
 	}
-
+	
 }
     

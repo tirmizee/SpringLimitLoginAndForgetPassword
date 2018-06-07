@@ -41,6 +41,8 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 				.accountNonExpired(member.getAccountNonExpired())
 				.accountNonLocked(member.getAccountNonLocked())
 				.credentialsNonExpired(member.getCredentialsNonExpired())
+				.initialLogin(member.getInitialLogin())
+				.initialLoginToken(member.getInitialLoginToken())
 				.build();
 	}
 	

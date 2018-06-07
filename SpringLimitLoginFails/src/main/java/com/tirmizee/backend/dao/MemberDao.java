@@ -10,4 +10,6 @@ public interface MemberDao extends MemberRepository{
 	Member findByEmail(String email);
 	
 	Member findByToken(String token);
+	
+	Member findFirstLogin(String username , String initToken);
 }
