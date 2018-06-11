@@ -18,7 +18,7 @@ import com.tirmizee.backend.api.password.data.ResetPasswordDTO;
 import com.tirmizee.backend.dao.ForgetPasswordDao;
 import com.tirmizee.backend.dao.MemberAttemptDao;
 import com.tirmizee.backend.dao.MemberDao;
-import com.tirmizee.backend.service.data.SampleMailInfo;
+import com.tirmizee.backend.service.data.SimpleMailInfo;
 import com.tirmizee.core.component.TemplateUtils;
 import com.tirmizee.core.domain.ForgetPassword;
 import com.tirmizee.core.domain.Member;
@@ -116,6 +116,10 @@ public class ForgetPasswordServiceImpl implements ForgetPasswordService{
 		return UUID.randomUUID().toString();
 	}
 	
+	public String generateUrl(String token){
+		return "http://localhost:8080/SpringLimitLoginFails/ResetPassword/" + token;
+	}
+	
 	public Timestamp getCurrentDate() {
 		return new Timestamp(new Date().getTime());
 	}
@@ -125,22 +129,19 @@ public class ForgetPasswordServiceImpl implements ForgetPasswordService{
 		return Timestamp.valueOf(dateTime);
 	}
 	
-	public String getUrl(String token){
-		return "http://localhost:8080/SpringLimitLoginFails/ResetPassword/" + token;
-	}
-	
 	public void sendMailForgetPassword(String email,String token){
 		
 		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("url", getUrl(token));
+		model.put("url", generateUrl(token));
 		
-		SampleMailInfo info = new SampleMailInfo();
+		SimpleMailInfo info = new SimpleMailInfo();
 		info.setDate(new Date());
 		info.setFrom("tirmizee@com");
 		info.setTo("pratyay@generali.co.th");
 		info.setSubject("Reset Password");
-		info.setContent(template.load( "ForgetPassword.ftl", model));
+		info.setContent(template.load("ForgetPassword.ftl", model));
 		mailService.send(info);
+		
 	}
 
 }

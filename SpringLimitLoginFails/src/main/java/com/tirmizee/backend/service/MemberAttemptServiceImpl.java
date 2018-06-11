@@ -48,7 +48,7 @@ public class MemberAttemptServiceImpl implements MemberAttemptService{
 		
 		final int attemps = attempt.getAttempts();
 		attempt.setAttempts(plusOne(attemps));
-		attempt.setLastModified(getCurrentTimestamp());
+		attempt.setLastModified(nowTimestamp());
 		memberAttemptDao.save(attempt);
 		
 		if ((attemps + 1) >= MAX_LOGIN_FAIL) {
@@ -63,7 +63,7 @@ public class MemberAttemptServiceImpl implements MemberAttemptService{
 		return attempts + 1;
 	}
 	
-	private Timestamp getCurrentTimestamp(){
+	private Timestamp nowTimestamp(){
 		return new Timestamp(new Date().getTime());
 	}
 

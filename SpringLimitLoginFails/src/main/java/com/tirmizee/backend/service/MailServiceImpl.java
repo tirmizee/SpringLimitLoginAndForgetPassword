@@ -8,7 +8,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
-import com.tirmizee.backend.service.data.SampleMailInfo;
+import com.tirmizee.backend.service.data.SimpleMailInfo;
 
 @Service("MailService")
 public class MailServiceImpl implements MailService{
@@ -19,7 +19,7 @@ public class MailServiceImpl implements MailService{
 	JavaMailSenderImpl mailSender;
 
 	@Override
-	public void send(SampleMailInfo mailInfo)  {
+	public void send(SimpleMailInfo mailInfo)  {
 		MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper;
 		try {

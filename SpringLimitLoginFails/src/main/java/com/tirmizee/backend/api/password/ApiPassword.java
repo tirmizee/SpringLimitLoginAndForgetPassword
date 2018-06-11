@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tirmizee.backend.api.password.data.ForceChangePasswordDTO;
+import com.tirmizee.backend.api.password.data.ChangePasswordDTO;
 import com.tirmizee.backend.api.password.data.ForgetPasswordDTO;
 import com.tirmizee.backend.api.password.data.ResetPasswordDTO;
 import com.tirmizee.backend.service.EnforceChangePasswordService;
@@ -24,7 +24,6 @@ public class ApiPassword {
 	@Autowired
 	private EnforceChangePasswordService forcePasswordChangeService;
 	
-	
 	@PostMapping(path="/forget")
 	public Boolean forgetPassword(@RequestBody ForgetPasswordDTO requestDTO){
 		return forgetPasswordService.forgetPassword(requestDTO.getEmail());
@@ -36,8 +35,14 @@ public class ApiPassword {
 		return true;
 	}
 	
+	@PostMapping(path="/change")
+	public Boolean change(@RequestBody @Valid ChangePasswordDTO changePwdDTO){
+		forcePasswordChangeService.changePasswordExpired(changePwdDTO);
+		return true;
+	}
+	
 	@PostMapping(path="/forceChange")
-	public Boolean forceChangePassword(@RequestBody @Valid ForceChangePasswordDTO changePwdDTO){
+	public Boolean forceChangePassword(@RequestBody @Valid ChangePasswordDTO changePwdDTO){
 		forcePasswordChangeService.changePasswordFirstLogin(changePwdDTO);
 		return true;
 	}

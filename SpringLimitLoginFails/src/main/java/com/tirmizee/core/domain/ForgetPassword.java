@@ -37,11 +37,9 @@ public class ForgetPassword implements Persistable<Long>{
 	public String getAccessIP() {
 		return accessIP;
 	}
-
 	public void setAccessIP(String accessIP) {
 		this.accessIP = accessIP;
 	}
-
 	public java.sql.Timestamp getExpiryDate() {
 		return expiryDate;
 	}

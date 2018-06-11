@@ -21,13 +21,17 @@ import com.tirmizee.backend.dao.MemberDao;
 import com.tirmizee.backend.dao.PermissionDao;
 import com.tirmizee.core.security.AuthenticationFailureHandlerImpl;
 import com.tirmizee.core.security.AuthenticationSuccessHandlerImpl;
-import com.tirmizee.core.security.DaoAuthenticationProviderImpl;
+import com.tirmizee.core.security.AuthenticationProviderImpl;
 import com.tirmizee.core.security.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+	
+	public static final String FORCE_CHANGE_PASSWAORD = "FORCE_CHANGE_PASSWAORD";
+	
+	public static final String CHANGE_PASSWAORD_EXPIRED = "CHANGE_PASSWAORD_EXPIRED";
 
 	@Autowired
 	private MemberDao memberDao;
@@ -48,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
-	    DaoAuthenticationProvider authProvider = new DaoAuthenticationProviderImpl();
+	    DaoAuthenticationProvider authProvider = new AuthenticationProviderImpl();
 	    authProvider.setHideUserNotFoundExceptions(false);
 	    authProvider.setUserDetailsService(userDetailsService());
 	    authProvider.setPasswordEncoder(passwordEncoder());
@@ -82,10 +86,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 				.antMatchers( "/login",
 							  "/ForgetPassword",
+							  "/ForcePasswordChangeExpired",
 							  "/api/password/forget",
 							  "/api/password/reset",
-							  "/api/password/forceChange",
 							  "/ResetPassword/**").permitAll()
+				.antMatchers( "/api/password/forceChange").hasAuthority(FORCE_CHANGE_PASSWAORD)
+				.antMatchers( "/api/password/change").hasAuthority(CHANGE_PASSWAORD_EXPIRED)
 				.anyRequest().authenticated()
 			.and()
 		    .formLogin().loginPage("/login").permitAll()
@@ -99,3 +105,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 }
+ 

@@ -1,8 +1,8 @@
 package com.tirmizee.backend.service;
 
-import com.tirmizee.backend.service.data.SampleMailInfo;
+import com.tirmizee.backend.service.data.SimpleMailInfo;
 
 public interface MailService {
 	
-	void send(SampleMailInfo mailInfo);
+	void send(SimpleMailInfo mailInfo);
 }

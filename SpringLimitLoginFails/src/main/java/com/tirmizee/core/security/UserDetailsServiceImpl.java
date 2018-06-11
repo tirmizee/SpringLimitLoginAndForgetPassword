@@ -36,17 +36,17 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 		return new UserProfile.Builder()
 				.username(username)
 				.password(member.getPassword())
-				.authorities(getAuthorities(permissions))
+				.authorities(grantAuthorities(permissions))
 				.enabled(member.getEnabled())
 				.accountNonExpired(member.getAccountNonExpired())
 				.accountNonLocked(member.getAccountNonLocked())
 				.credentialsNonExpired(member.getCredentialsNonExpired())
 				.initialLogin(member.getInitialLogin())
-				.initialLoginToken(member.getInitialLoginToken())
+				.credentialsExpiredDate(member.getCredentialsExpiredDate())
 				.build();
 	}
 	
-	private Set<GrantedAuthority> getAuthorities(Collection<Permission> permissions){
+	private Set<GrantedAuthority> grantAuthorities(Collection<Permission> permissions){
         Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
         permissions.forEach(o -> authorities.add(new SimpleGrantedAuthority(o.getPerCode())));
 	    return authorities;

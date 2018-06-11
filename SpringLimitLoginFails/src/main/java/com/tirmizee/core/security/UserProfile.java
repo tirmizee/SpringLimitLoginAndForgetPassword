@@ -1,5 +1,7 @@
 package com.tirmizee.core.security;
 
+import java.sql.Timestamp;
+
 public class UserProfile extends UserDetailsImpl{
 	
 	private static final long serialVersionUID = 196667297093501169L;
@@ -8,7 +10,7 @@ public class UserProfile extends UserDetailsImpl{
 	private String lastName;
 	private String accessIp;
 	private boolean initialLogin;
-	private String initialLoginToken;
+	private Timestamp credentialsExpiredDate;
 	
 	public UserProfile(Builder builder) {
 		super(builder);
@@ -16,7 +18,7 @@ public class UserProfile extends UserDetailsImpl{
 		this.lastName = builder.lastName;
 		this.accessIp = builder.accessIp;
 		this.initialLogin = builder.initialLogin;
-		this.initialLoginToken = builder.initialLoginToken;
+		this.credentialsExpiredDate = builder.credentialsExpiredDate;
 	}
 	
 	public String getFistName() {
@@ -43,11 +45,11 @@ public class UserProfile extends UserDetailsImpl{
 	public void setInitialLogin(boolean initialLogin) {
 		this.initialLogin = initialLogin;
 	}
-	public String getInitialLoginToken() {
-		return initialLoginToken;
+	public Timestamp getCredentialsExpiredDate() {
+		return credentialsExpiredDate;
 	}
-	public void setInitialLoginToken(String initialLoginToken) {
-		this.initialLoginToken = initialLoginToken;
+	public void setCredentialsExpiredDate(Timestamp credentialsExpiredDate) {
+		this.credentialsExpiredDate = credentialsExpiredDate;
 	}
 
 	public static class Builder extends UserDetailsImpl.Builder<Builder>{
@@ -56,7 +58,7 @@ public class UserProfile extends UserDetailsImpl{
 		private String lastName;
 		private String accessIp;
 		private boolean initialLogin;
-		private String initialLoginToken;
+		private Timestamp credentialsExpiredDate;
 		
 		public Builder(){}
 		
@@ -80,8 +82,8 @@ public class UserProfile extends UserDetailsImpl{
 			return this;
 		}
 		
-		public Builder initialLoginToken(String initialLoginToken){
-			this.initialLoginToken = initialLoginToken;
+		public Builder credentialsExpiredDate(Timestamp credentialsExpiredDate){
+			this.credentialsExpiredDate = credentialsExpiredDate;
 			return this;
 		}
 		

@@ -21,7 +21,7 @@ public class Member implements Persistable<String>{
 	private Boolean accountNonExpired;
 	private Boolean credentialsNonExpired;
 	private Boolean initialLogin;
- 	private String initialLoginToken;
+	private Timestamp credentialsExpiredDate;
 	private Timestamp createDate;
 	private Timestamp updateDate;
 	
@@ -115,14 +115,6 @@ public class Member implements Persistable<String>{
 		this.initialLogin = initialLogin;
 	}
 	
-	public String getInitialLoginToken() {
-		return initialLoginToken;
-	}
-
-	public void setInitialLoginToken(String initialLoginToken) {
-		this.initialLoginToken = initialLoginToken;
-	}
-
 	public Timestamp getCreateDate() {
 		return createDate;
 	}
@@ -137,6 +129,14 @@ public class Member implements Persistable<String>{
 
 	public void setUpdateDate(Timestamp updateDate) {
 		this.updateDate = updateDate;
+	}
+
+	public Timestamp getCredentialsExpiredDate() {
+		return credentialsExpiredDate;
+	}
+
+	public void setCredentialsExpiredDate(Timestamp credentialsExpiredDate) {
+		this.credentialsExpiredDate = credentialsExpiredDate;
 	}
 
 	public Member withPersisted(boolean persisted) {

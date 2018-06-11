@@ -11,5 +11,5 @@ public interface MemberDao extends MemberRepository{
 	
 	Member findByToken(String token);
 	
-	Member findFirstLogin(String username , String initToken);
+	Member findFirstLogin(String username);
 }

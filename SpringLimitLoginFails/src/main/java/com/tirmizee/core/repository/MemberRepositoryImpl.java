@@ -36,7 +36,7 @@ public class MemberRepositoryImpl extends AbstractJdbcRepository<Member, String>
 			member.setAccountNonExpired(rs.getBoolean(COL_ACCOUNTNONEXPIRED));
 			member.setCredentialsNonExpired(rs.getBoolean(COL_CREDENTIALSNONEXPIRED));
 			member.setInitialLogin(rs.getBoolean(COL_INITIALLOGIN));
-			member.setInitialLoginToken(rs.getString(COL_INITIALLOGINTOKEN));
+			member.setCredentialsExpiredDate(rs.getTimestamp(COL_CREDENTIALSEXPIREDDATE));
 			member.setCreateDate(rs.getTimestamp(COL_CREATEDATE));
 			member.setUpdateDate(rs.getTimestamp(COL_UPDATEDATE));
 			return member.withPersisted(true);
@@ -56,7 +56,7 @@ public class MemberRepositoryImpl extends AbstractJdbcRepository<Member, String>
 			map.put(COL_ACCOUNTNONEXPIRED, param.getAccountNonExpired());
 			map.put(COL_CREDENTIALSNONEXPIRED, param.getCredentialsNonExpired());
 			map.put(COL_INITIALLOGIN , param.getInitialLogin());
-			map.put(COL_INITIALLOGINTOKEN , param.getInitialLoginToken());
+			map.put(COL_CREDENTIALSEXPIREDDATE, param.getCredentialsExpiredDate());
 			map.put(COL_CREATEDATE, param.getCreateDate());
 			map.put(COL_UPDATEDATE, param.getUpdateDate());
 			return map;

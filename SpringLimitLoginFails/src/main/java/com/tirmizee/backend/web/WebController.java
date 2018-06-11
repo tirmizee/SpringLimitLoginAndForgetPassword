@@ -44,7 +44,12 @@ public class WebController {
 	
 	@PostMapping(path = "/ForcePasswordChange")
 	public ModelAndView forcePasswordChange(HttpServletRequest request){
-		return new ModelAndView("pages/forcePasswordChange");
+		return new ModelAndView("pages/changePasswordFirstLogin");
+	}
+	
+	@PostMapping(path = "/ForcePasswordChangeExpired")
+	public ModelAndView forcePasswordChangeExpired(HttpServletRequest request){
+		return new ModelAndView("pages/changePasswordExpired");
 	}
 	
 	@GetMapping(path = "/ForgetPassword")

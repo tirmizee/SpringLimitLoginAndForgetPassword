@@ -3,10 +3,9 @@ package com.tirmizee.backend.service.data;
 import java.io.Serializable;
 import java.util.Date;
 
-public class SampleMailInfo implements Serializable{
+public class SimpleMailInfo implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-	
 	private String from;
 	private String to;
 	private String content;
