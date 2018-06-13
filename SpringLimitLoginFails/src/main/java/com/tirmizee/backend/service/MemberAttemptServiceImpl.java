@@ -25,15 +25,12 @@ public class MemberAttemptServiceImpl implements MemberAttemptService{
 	@Override
 	public void resetMemberAttempt(final String username) {
 		MemberAttempt attempt = memberAttemptDao.findByUsername(username);
-		if (attempt != null) {
-			attempt.setAttempts(0);
-			memberAttemptDao.save(attempt);
-		}else {
+		if (attempt == null) {
 			attempt = new MemberAttempt();
 			attempt.setUsername(username);
-			attempt.setAttempts(0);
-			memberAttemptDao.save(attempt);
 		}
+		attempt.setAttempts(0);
+		memberAttemptDao.save(attempt);
 	}
 	
 	@Override

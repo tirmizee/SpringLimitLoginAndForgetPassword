@@ -12,10 +12,10 @@ public class MemberAttemptDaoImpl extends MemberAttemptRepositoryImpl implements
 
 	@Override
 	public MemberAttempt findByUsername(String username) {
-		StringBuilder select = new StringBuilder()
-			.append("select * from ").append(TABLE_MEMBERATTEMPT)
-			.append(" where ").append(COL_USERNAME).append(" = ? ");
-		try{
+		try {
+			StringBuilder select = new StringBuilder()
+				.append(" select * from ").append(TABLE_MEMBERATTEMPT)
+				.append(" where ").append(COL_USERNAME).append(" = ? ");
 			return getJdbcOps().queryForObject(select.toString(),new Object[]{username},ROW_MAPPER);
 		}catch (EmptyResultDataAccessException e) {
 			return null;

@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.CredentialsExpiredException;
+import org.springframework.security.authentication.LockedException;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -11,8 +12,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.tirmizee.backend.service.EnforceChangePasswordService;
 import com.tirmizee.backend.service.MemberAttemptService;
-import com.tirmizee.core.exception.GTCredentialsExpiredException;
-import com.tirmizee.core.exception.CredentialsFirstloginException;
+import com.tirmizee.core.exception.IBadCredentialsException;
+import com.tirmizee.core.exception.ICredentialsExpiredException;
+import com.tirmizee.core.exception.ICredentialsFirstloginException;
+import com.tirmizee.core.exception.ILockedException;
+import com.tirmizee.core.exception.IUsernameNotFoundException;
 
 public class AuthenticationProviderImpl extends DaoAuthenticationProvider {
 	
@@ -32,23 +36,25 @@ public class AuthenticationProviderImpl extends DaoAuthenticationProvider {
 			Authentication authen = super.authenticate(authentication);
 			userProfile =  (UserProfile) authen.getPrincipal();
 			if (userProfile.isInitialLogin()) {
-				throw new CredentialsFirstloginException( username , "Force password change");
+				throw new ICredentialsFirstloginException( username , "Force password change");
 			}
 			if (enforceChangePasswordService.isPasswordExpired(userProfile.getCredentialsExpiredDate())) {
 				enforceChangePasswordService.updatePasswordExpired(username);
-				throw new GTCredentialsExpiredException(username,"User account credentials have expired");
+				throw new ICredentialsExpiredException(username,"User account credentials have expired");
 			}
 			if (authen.isAuthenticated()) {
 				memberAttemptService.resetMemberAttempt(username);
 			}
 			return authen;
 		}catch (UsernameNotFoundException e) {
-			throw new UsernameNotFoundException(username);
+			throw new IUsernameNotFoundException(username, "Username not found");
+		}catch (CredentialsExpiredException e) {
+			throw new ICredentialsExpiredException(username, "User account credentials have expired");
+		}catch (LockedException e) {
+			throw new ILockedException(username, "User account is locked");
 		}catch (BadCredentialsException e) {
 			memberAttemptService.updateMemberAttempt(username);
-			throw new BadCredentialsException(username);
-		}catch (CredentialsExpiredException e) {
-			throw new GTCredentialsExpiredException(username,"User account credentials have expired");
+			throw new IBadCredentialsException(username, "Credentials not valid");
 		}
 	}
 	

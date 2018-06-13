@@ -1,5 +1,11 @@
 <body>
-	<div style="background-color:#f1f1f1;height: 500px;padding-top: 50px;padding-bottom: 50px">
+	<div>
+		<center>
+			<div style="width:200px">
+				<img src='cid:company-logo'>
+			</div>
+		</center>
+		<br>
 		<center>
 			<font size="20px">Forgot Your Password Lets Get You New One.</font>
 		</center>

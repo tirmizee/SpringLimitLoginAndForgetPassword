@@ -66,7 +66,7 @@ public class ForgetPasswordServiceImpl implements ForgetPasswordService{
 		
 		forgetPassword.setUsername(member.getUsername());
 		forgetPassword.setExpiryDate(getExpiryDate());
-		forgetPassword.setCreateDate(getCurrentDate());
+		forgetPassword.setCreateDate(nowTimestamp());
 		forgetPassword.setToken(generateUUID());
 		forgetPassword.setAccessIP(request.getRemoteAddr());
 		forgetPasswordDao.save(forgetPassword);
@@ -97,7 +97,7 @@ public class ForgetPasswordServiceImpl implements ForgetPasswordService{
 		Member member = memberDao.findByToken(token);
 		member.setAccountNonLocked(true);
 		member.setPassword(passwordEncoder.encode(resetDTO.getPassword()));
-		member.setUpdateDate(getCurrentDate());
+		member.setUpdateDate(nowTimestamp());
 		memberDao.save(member);
 		
 		MemberAttempt memberAttempt = memberAttemptDao.findByUsername(member.getUsername());
@@ -109,7 +109,7 @@ public class ForgetPasswordServiceImpl implements ForgetPasswordService{
 	@Override
 	public Boolean isTokenExpired(String token) {
 		ForgetPassword forgetPassword = forgetPasswordDao.findByToken(token);
-		return getCurrentDate().after(forgetPassword.getExpiryDate());
+		return nowTimestamp().after(forgetPassword.getExpiryDate());
 	}
 	
 	public String generateUUID(){
@@ -117,10 +117,11 @@ public class ForgetPasswordServiceImpl implements ForgetPasswordService{
 	}
 	
 	public String generateUrl(String token){
-		return "http://localhost:8080/SpringLimitLoginFails/ResetPassword/" + token;
+		String baseUrl = String.format("%s://%s:%d%s", request.getScheme(), request.getServerName(), request.getServerPort(), request.getContextPath());
+		return baseUrl + "/ResetPassword/" + token;
 	}
 	
-	public Timestamp getCurrentDate() {
+	public Timestamp nowTimestamp() {
 		return new Timestamp(new Date().getTime());
 	}
 	
@@ -131,7 +132,7 @@ public class ForgetPasswordServiceImpl implements ForgetPasswordService{
 	
 	public void sendMailForgetPassword(String email,String token){
 		
-		Map<String, Object> model = new HashMap<String, Object>();
+		Map<String, Object> model = new HashMap<>();
 		model.put("url", generateUrl(token));
 		
 		SimpleMailInfo info = new SimpleMailInfo();
@@ -140,7 +141,7 @@ public class ForgetPasswordServiceImpl implements ForgetPasswordService{
 		info.setTo("pratyay@generali.co.th");
 		info.setSubject("Reset Password");
 		info.setContent(template.load("ForgetPassword.ftl", model));
-		mailService.send(info);
+		mailService.sendSimpleMail(info);
 		
 	}
 

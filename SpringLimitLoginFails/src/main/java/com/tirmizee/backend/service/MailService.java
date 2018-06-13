@@ -4,5 +4,5 @@ import com.tirmizee.backend.service.data.SimpleMailInfo;
 
 public interface MailService {
 	
-	void send(SimpleMailInfo mailInfo);
+	void sendSimpleMail(SimpleMailInfo mailInfo);
 }

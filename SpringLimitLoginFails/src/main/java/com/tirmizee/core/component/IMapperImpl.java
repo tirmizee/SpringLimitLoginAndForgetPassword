@@ -12,9 +12,9 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
-public class GTMapperImpl extends DozerBeanMapper implements GTMapper {
+public class IMapperImpl extends DozerBeanMapper implements IMapper {
 	
-	public GTMapperImpl(List<String> mappingFiles) {
+	public IMapperImpl(List<String> mappingFiles) {
 		super(mappingFiles);
 	}
 
