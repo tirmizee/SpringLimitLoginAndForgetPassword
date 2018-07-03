@@ -7,9 +7,11 @@ import java.util.Set;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-
+  
 import com.tirmizee.core.jdbcrepository.TableDescription;
+	
 public class SqlGenerator {
+	
 	public static final String WHERE = " WHERE ";
 	public static final String AND = " AND ";
 	public static final String OR = " OR ";
@@ -19,15 +21,15 @@ public class SqlGenerator {
 	public static final String COMMA = ", ";
 	public static final String PARAM = " = ?";
 	private String allColumnsClause;
-
+	
 	public SqlGenerator(String allColumnsClause) {
 		this.allColumnsClause = allColumnsClause;
 	}
-
+	
 	public SqlGenerator() {
 		this("*");
 	}
-
+	
 	public String count(TableDescription table) {
 		return SELECT + "COUNT(*) " + FROM + table.getFromClause();
 	}
@@ -118,11 +120,11 @@ public class SqlGenerator {
 		final int offset = page.getPageNumber() * page.getPageSize();
 		return " LIMIT " + offset + COMMA + page.getPageSize();
 	}
-
+	
 	public String selectById(TableDescription table) {
 		return selectAll(table) + whereByIdClause(table);
 	}
-
+	
 	public String selectByIds(TableDescription table, int idsCount) {
 		switch (idsCount) {
 			case 0:

@@ -12,20 +12,20 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
-public class IMapperImpl extends DozerBeanMapper implements IMapper {
+public class PageMapperImpl extends DozerBeanMapper implements PageMapper {
 	
-	public IMapperImpl(List<String> mappingFiles) {
+	public PageMapperImpl(List<String> mappingFiles) {
 		super(mappingFiles);
 	}
 
 	@Override
 	public <T> List<T> map(List<?> source, Class<T> destinationClass) {
-		return  (List<T>) internalMap(source, destinationClass, new ArrayList<>());
+		return  (List<T>) map(source, destinationClass, new ArrayList<>());
 	}
 	
 	@Override
 	public <T> Set<T> map(Set<?> source, Class<T> destinationClass) {
-		return (Set<T>) internalMap(source, destinationClass, new HashSet<>());
+		return (Set<T>) map(source, destinationClass, new HashSet<>());
 	}
 	
 	@Override
@@ -33,7 +33,7 @@ public class IMapperImpl extends DozerBeanMapper implements IMapper {
 		return internalMapPage(source, destinationClass);	
 	}
 	
-	private <T> Collection<T> internalMap(Collection<?> source , Class<T> destinationClass ,Collection<T> target){
+	private <T> Collection<T> map(Collection<?> source , Class<T> destinationClass ,Collection<T> target){
 		for (Object t : source) { 
 			target.add(map(t, destinationClass));
 		}

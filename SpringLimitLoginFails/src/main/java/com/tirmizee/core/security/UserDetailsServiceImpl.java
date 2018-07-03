@@ -27,12 +27,15 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 	}
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Member member  = memberDao.findByUsername(username);
+	public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
+		
+		final Member member  = memberDao.findByUsername(username);
 		if (member == null ) {
 			throw new UsernameNotFoundException(username);
 		}
+		
 		List<Permission> permissions = permissionDao.findByUsername(username);
+		
 		return new UserProfile.Builder()
 				.username(username)
 				.password(member.getPassword())
@@ -46,7 +49,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 				.build();
 	}
 	
-	private Set<GrantedAuthority> grantAuthorities(Collection<Permission> permissions){
+	private Set<GrantedAuthority> grantAuthorities(Collection<? extends Permission> permissions){
         Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
         permissions.forEach(o -> authorities.add(new SimpleGrantedAuthority(o.getPerCode())));
 	    return authorities;

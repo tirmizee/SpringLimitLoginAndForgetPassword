@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javax.validation.constraints.NotNull;
 
-public class ResetPasswordDTO implements PasswordConfirmation ,Serializable {
+public class ResetPasswordDTO implements PasswordConfirmation , Serializable {
 
 	private static final long serialVersionUID = 1L;
 	

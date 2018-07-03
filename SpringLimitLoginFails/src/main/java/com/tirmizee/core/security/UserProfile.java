@@ -2,7 +2,7 @@ package com.tirmizee.core.security;
 
 import java.sql.Timestamp;
 
-public class UserProfile extends UserDetailsImpl{
+public class UserProfile extends UserDetailsImpl {
 	
 	private static final long serialVersionUID = 196667297093501169L;
 	

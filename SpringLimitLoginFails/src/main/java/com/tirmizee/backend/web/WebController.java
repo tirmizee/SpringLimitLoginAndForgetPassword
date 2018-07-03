@@ -31,6 +31,7 @@ public class WebController {
 	@GetMapping(value = "/login")
 	public ModelAndView login(@RequestParam(required = false) String error){
         ModelAndView model = new ModelAndView("index");
+        System.out.println();
 		if (error != null) {
 			model.addObject("error",error);
 		}

@@ -7,13 +7,17 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurerAdapter{
-
+	
+	public static final String PREFIX = "/WEB-INF/views/";
+	
+	public static final String SUFFIX = ".jsp";
+	
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {
 		registry.enableContentNegotiation(true);
         registry.jsp()
-                .prefix("/WEB-INF/views/")
-                .suffix(".jsp");
+        		.prefix(PREFIX)
+                .suffix(SUFFIX);
 	}
 	
 	// old configuration view resolvers

@@ -6,7 +6,7 @@ import java.util.Set;
 import org.dozer.Mapper;
 import org.springframework.data.domain.Page;
 
-public interface IMapper extends Mapper{
+public interface PageMapper extends Mapper{
 
 	<T> List<T> map(List<?> source, Class<T> destinationClass);
 	

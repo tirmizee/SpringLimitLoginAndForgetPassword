@@ -1,8 +1,11 @@
 package com.tirmizee.core.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -12,7 +15,11 @@ import com.tirmizee.core.component.MessageSourceUtilsImpl;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = {"com.tirmizee"})
+@PropertySource(value = { "classpath:app.properties" })
 public class AppConfig {
+	
+	@Autowired
+	private Environment env;
 	
 	@Bean
 	public MessageSourceUtils messageSource() {
@@ -26,8 +33,8 @@ public class AppConfig {
 	@Bean
 	public JavaMailSenderImpl javaMailSenderImpl(){
 		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-		mailSender.setHost("192.168.1.214");
-	    mailSender.setPort(25);
+		mailSender.setHost(env.getProperty("mail.host"));
+	    mailSender.setPort(Integer.parseInt(env.getProperty("mail.port")));
         return mailSender;
 	}
 	

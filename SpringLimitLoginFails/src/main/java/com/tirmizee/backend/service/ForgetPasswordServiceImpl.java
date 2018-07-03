@@ -104,11 +104,14 @@ public class ForgetPasswordServiceImpl implements ForgetPasswordService{
 		memberAttempt.setAttempts(0);
 		memberAttemptDao.save(memberAttempt);
 		
+		forgetPassword.setExpiryDate(nowTimestamp());
+		forgetPasswordDao.save(forgetPassword);
+		
 	}
 	
 	@Override
 	public Boolean isTokenExpired(String token) {
-		ForgetPassword forgetPassword = forgetPasswordDao.findByToken(token);
+		final ForgetPassword forgetPassword = forgetPasswordDao.findByToken(token);
 		return nowTimestamp().after(forgetPassword.getExpiryDate());
 	}
 	

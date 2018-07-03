@@ -6,8 +6,8 @@ public interface ForgetPasswordService {
 	
 	Boolean forgetPassword(String email);
 	
-	void resetPassword(ResetPasswordDTO passwordDTO);
-	
 	Boolean isTokenExpired(String token);
+	
+	void resetPassword(ResetPasswordDTO passwordDTO);
 
 }

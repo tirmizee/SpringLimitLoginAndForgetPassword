@@ -36,11 +36,11 @@ public class AuthenticationProviderImpl extends DaoAuthenticationProvider {
 			Authentication authen = super.authenticate(authentication);
 			userProfile =  (UserProfile) authen.getPrincipal();
 			if (userProfile.isInitialLogin()) {
-				throw new ICredentialsFirstloginException( username , "Force password change");
+				throw new ICredentialsFirstloginException( username, "Force password change");
 			}
 			if (enforceChangePasswordService.isPasswordExpired(userProfile.getCredentialsExpiredDate())) {
 				enforceChangePasswordService.updatePasswordExpired(username);
-				throw new ICredentialsExpiredException(username,"User account credentials have expired");
+				throw new ICredentialsExpiredException(username, "User account credentials have expired");
 			}
 			if (authen.isAuthenticated()) {
 				memberAttemptService.resetMemberAttempt(username);
