@@ -50,6 +50,7 @@ public class MemberAttemptServiceImpl implements MemberAttemptService{
 		
 		if ((attemp + 1) >= MAX_LOGIN_FAIL) {
 			Member member = memberDao.findByUsername(username);
+			System.out.println(member.toString());
 			member.setAccountNonLocked(false);
 			memberDao.save(member);
 		}

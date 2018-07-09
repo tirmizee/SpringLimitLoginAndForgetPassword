@@ -17,10 +17,14 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @PropertySource(value = { "classpath:db.properties" })
 public class RepositoryConfig {
 	
+	public static final String MSSQL_DATASOURCE = "MSSQL_DATASOURCE";
+	
+	public static final String MSSQL_TRANSACTION = "MSSQL_TRANSACTION";
+	
 	@Autowired
 	private Environment env;
 	
-	@Bean
+	@Bean(MSSQL_DATASOURCE)
 	public DataSource dataSource(){
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
@@ -30,7 +34,7 @@ public class RepositoryConfig {
 		return dataSource;
 	}
 	
-	@Bean
+	@Bean(MSSQL_TRANSACTION)
 	public PlatformTransactionManager transactionManager() {
 	    return new DataSourceTransactionManager(dataSource());
 	}

@@ -85,15 +85,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		    // unuse csrf
 			.csrf().disable()
 			.authorizeRequests()
+			
 				.antMatchers( "/login",
 							  "/ForgetPassword",
+							  "/Register",
 							  "/ForcePasswordChangeExpired",
 							  "/api/password/forget",
 							  "/api/password/reset",
+							  "/api/member/register",
 							  "/ResetPassword/**").permitAll()
+				
 				.antMatchers( "/api/password/forceChange").hasAuthority(FORCE_CHANGE_PASSWAORD)
+				
 				.antMatchers( "/api/password/change").hasAuthority(CHANGE_PASSWAORD_EXPIRED)
+				
 				.anyRequest().authenticated()
+				
 			.and()
 		    .formLogin().loginPage("/login").permitAll()
 		    	.successHandler(successHandler)

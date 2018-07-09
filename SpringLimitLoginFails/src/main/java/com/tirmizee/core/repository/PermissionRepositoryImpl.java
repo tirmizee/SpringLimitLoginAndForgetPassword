@@ -9,11 +9,11 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.tirmizee.core.domain.Permission;
-import com.tirmizee.core.jdbcrepository.AbstractJdbcRepository;
+import com.tirmizee.core.jdbcrepository.AbstractMssqlRepository;
 import com.tirmizee.core.jdbcrepository.RowUnmapper;
 
 @Repository("PermissionRepository")
-public class PermissionRepositoryImpl extends AbstractJdbcRepository<Permission, Long> implements PermissionRepository{
+public class PermissionRepositoryImpl extends AbstractMssqlRepository<Permission, Long> implements PermissionRepository{
 
 	public PermissionRepositoryImpl() {
 		this(TABLE_PERMISSION);

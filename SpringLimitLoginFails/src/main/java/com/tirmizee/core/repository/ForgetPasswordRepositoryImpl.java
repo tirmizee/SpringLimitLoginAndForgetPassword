@@ -8,10 +8,10 @@ import java.util.Map;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.tirmizee.core.domain.ForgetPassword;
-import com.tirmizee.core.jdbcrepository.AbstractJdbcRepository;
+import com.tirmizee.core.jdbcrepository.AbstractMssqlRepository;
 import com.tirmizee.core.jdbcrepository.RowUnmapper;
 
-public class ForgetPasswordRepositoryImpl extends AbstractJdbcRepository<ForgetPassword, Long> implements ForgetPasswordRepository{
+public class ForgetPasswordRepositoryImpl extends AbstractMssqlRepository<ForgetPassword, Long> implements ForgetPasswordRepository{
 
 
 	public ForgetPasswordRepositoryImpl() {

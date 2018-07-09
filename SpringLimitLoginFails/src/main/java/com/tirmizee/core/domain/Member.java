@@ -143,5 +143,14 @@ public class Member implements Persistable<String>{
 		this.persisted = persisted;
 		return this;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Member [username=" + username + ", password=" + password + ", fkRoleId=" + fkRoleId + ", email=" + email
+				+ ", enabled=" + enabled + ", accountNonLocked=" + accountNonLocked + ", accountNonExpired="
+				+ accountNonExpired + ", credentialsNonExpired=" + credentialsNonExpired + ", initialLogin="
+				+ initialLogin + ", credentialsExpiredDate=" + credentialsExpiredDate + ", createDate=" + createDate
+				+ ", updateDate=" + updateDate + "]";
+	}
+
 }

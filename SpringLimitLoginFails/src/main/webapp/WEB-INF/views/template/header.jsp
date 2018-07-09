@@ -1,4 +1,5 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<security:authentication var="profile" property="principal" />
 <header class="main-header">
     <!-- Logo -->
     <a href="index2.html" class="logo">
@@ -28,7 +29,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="${pageContext.request.contextPath}/resources/libs/admin-lte2/img/user.png" class="user-image" alt="User Image">
-              <span class="hidden-xs">${user.username}</span>
+              <span class="hidden-xs">${profile.username}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->

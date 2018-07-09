@@ -4,6 +4,7 @@
 <!DOCTYPE>
 <html>
 <head>
+
   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -16,13 +17,13 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/admin-lte2/css/skins/skin-green.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/validate-form-master/css/formValidation.min.css">
 
-
   <script src="${pageContext.request.contextPath}/resources/libs/bootstrap/js/jquery-3.2.1.min.js" ></script>
   <script src="${pageContext.request.contextPath}/resources/libs/bootstrap/js/bootstrap.min.js" ></script>
   <script src="${pageContext.request.contextPath}/resources/libs/admin-lte2/js/app.js"></script>
   <script src="${pageContext.request.contextPath}/resources/libs/validate-form-master/js/formValidation.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/libs/validate-form-master/js/formValidation.popular.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/libs/validate-form-master/js/framework/bootstrap.min.js"></script>
+  
   <style >
 	/* .main-sidebar { background-color: #333 !important }
 	.sidebar-menu>li>.treeview-menu {
@@ -30,7 +31,7 @@
 	    background: #3d8420 !important
 	} */
   </style>
-  <title>Hello JSP</title>
+  <title>SpringLimitLoginFails</title>
 </head>
 <body class="hold-transition skin-green sidebar-mini">
   <div class="wrapper">
@@ -118,18 +119,11 @@
         </div>
         <!-- ./col -->
       </div>
-
-
-      </section>
-      <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
+      </section><!-- /.content -->
+    </div><!-- /.content-wrapper -->
 
    <jsp:include page="../template/footer.jsp" />
 
-    <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-  immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
 
 </div>

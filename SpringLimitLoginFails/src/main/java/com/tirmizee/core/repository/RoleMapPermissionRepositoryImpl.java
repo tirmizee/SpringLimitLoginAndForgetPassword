@@ -9,11 +9,11 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.tirmizee.core.domain.RoleMapPermission;
-import com.tirmizee.core.jdbcrepository.AbstractJdbcRepository;
+import com.tirmizee.core.jdbcrepository.AbstractMssqlRepository;
 import com.tirmizee.core.jdbcrepository.RowUnmapper;
 
 @Repository("RoleMapPermissionRepository")
-public class RoleMapPermissionRepositoryImpl extends AbstractJdbcRepository<RoleMapPermission, Long> implements RoleMapPermissionRepository{
+public class RoleMapPermissionRepositoryImpl extends AbstractMssqlRepository<RoleMapPermission, Long> implements RoleMapPermissionRepository{
 
 	public RoleMapPermissionRepositoryImpl() {
 		this(TABLE_ROLE_MAP_PERMISSION);

@@ -1,3 +1,5 @@
+ <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<security:authentication var="profile" property="principal" />
  <!-- Left side column. contains the logo and sidebar -->
  <aside class="main-sidebar">
   <!-- sidebar: style can be found in sidebar.less -->
@@ -8,8 +10,8 @@
         <img src="resources/libs/admin-lte2/img/user.png" class="img-circle" alt="User Image">
       </div>
       <div class="pull-left info">
-        <p>${user.firstName} ${user.lastName}</p>
-        <a href="">${user.username}</a>
+        <p>${profile.username}</p>
+        <a href="">${profile.roleName}</a>
       </div>
     </div>    
     <!-- /.search form -->

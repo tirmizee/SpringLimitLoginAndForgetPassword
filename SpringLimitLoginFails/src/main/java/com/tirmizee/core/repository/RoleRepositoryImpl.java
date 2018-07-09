@@ -9,11 +9,11 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.tirmizee.core.domain.Role;
-import com.tirmizee.core.jdbcrepository.AbstractJdbcRepository;
+import com.tirmizee.core.jdbcrepository.AbstractMssqlRepository;
 import com.tirmizee.core.jdbcrepository.RowUnmapper;
 
 @Repository("RoleRepository")
-public class RoleRepositoryImpl extends AbstractJdbcRepository<Role, Integer> implements RoleRepository{
+public class RoleRepositoryImpl extends AbstractMssqlRepository<Role, Integer> implements RoleRepository{
 
 	public RoleRepositoryImpl() {
 		this(TABLE_ROLE);

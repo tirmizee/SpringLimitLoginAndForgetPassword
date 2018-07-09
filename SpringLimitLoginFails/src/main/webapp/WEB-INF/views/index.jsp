@@ -62,7 +62,7 @@
 	background-color: #f7f7f7;
 }
 </style>
-<title>UWDocumentControl</title>
+<title>SpringLimitLoginFails</title>
 </head>
 <body class="bg">
 	<div class="container" >
@@ -108,8 +108,11 @@
 	    	<div class="input-group pull-right">
 	    		<a href="${pageContext.request.contextPath}/ForgetPassword">Forget Password</a>
 	    	</div>
+	    	<br>
+	    	<div class="input-group pull-right">
+	    		<a href="${pageContext.request.contextPath}/Register">Register a new membership</a>
+	    	</div>
 	    </div>	
-	    <br>
 	    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />			
 	</form>
   </div>

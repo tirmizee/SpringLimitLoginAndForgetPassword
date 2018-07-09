@@ -8,6 +8,7 @@ public class UserProfile extends UserDetailsImpl {
 	
 	private String fistName;
 	private String lastName;
+	private String roleName;
 	private String accessIp;
 	private boolean initialLogin;
 	private Timestamp credentialsExpiredDate;
@@ -16,6 +17,7 @@ public class UserProfile extends UserDetailsImpl {
 		super(builder);
 		this.fistName = builder.fistName;
 		this.lastName = builder.lastName;
+		this.roleName = builder.roleName;
 		this.accessIp = builder.accessIp;
 		this.initialLogin = builder.initialLogin;
 		this.credentialsExpiredDate = builder.credentialsExpiredDate;
@@ -32,6 +34,12 @@ public class UserProfile extends UserDetailsImpl {
 	}
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+	public String getRoleName() {
+		return roleName;
+	}
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
 	public String getAccessIp() {
 		return accessIp;
@@ -56,6 +64,7 @@ public class UserProfile extends UserDetailsImpl {
 		
 		private String fistName;
 		private String lastName;
+		private String roleName;
 		private String accessIp;
 		private boolean initialLogin;
 		private Timestamp credentialsExpiredDate;
@@ -69,6 +78,11 @@ public class UserProfile extends UserDetailsImpl {
 		
 		public Builder lastName(String lastName){
 			this.lastName = lastName;
+			return this;
+		}
+		
+		public Builder roleName(String roleName){
+			this.roleName = roleName;
 			return this;
 		}
 		

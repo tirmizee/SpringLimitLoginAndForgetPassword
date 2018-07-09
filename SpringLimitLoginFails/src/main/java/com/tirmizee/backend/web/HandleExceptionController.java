@@ -12,7 +12,7 @@ import com.tirmizee.core.exception.ErrorMessage;
 import com.tirmizee.core.exception.UrlNotFoundException;
 
 @ControllerAdvice
-public class GlobalController {
+public class HandleExceptionController {
 	
 	@Autowired 
 	MessageSourceUtils messageSource;

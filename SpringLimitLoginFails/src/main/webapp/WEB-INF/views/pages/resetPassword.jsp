@@ -64,7 +64,7 @@
 	background-color: #f7f7f7;
 }
 </style>
-<title>UWDocumentControl</title>
+<title>SpringLimitLoginFails</title>
 </head>
 <body class="bg">
 	<div class="container" >

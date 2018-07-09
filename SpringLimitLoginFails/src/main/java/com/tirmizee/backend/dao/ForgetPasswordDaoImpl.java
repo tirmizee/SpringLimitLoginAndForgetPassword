@@ -20,7 +20,6 @@ public class ForgetPasswordDaoImpl extends ForgetPasswordRepositoryImpl implemen
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
-		
 	}
 
 	@Override

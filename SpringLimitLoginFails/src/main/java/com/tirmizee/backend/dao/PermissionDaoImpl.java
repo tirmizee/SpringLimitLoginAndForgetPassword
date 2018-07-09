@@ -1,9 +1,15 @@
 package com.tirmizee.backend.dao;
 
+import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import com.tirmizee.backend.api.permission.data.SearchPermissionDTO;
 import com.tirmizee.core.domain.Permission;
 import com.tirmizee.core.repository.MemberRepository;
 import com.tirmizee.core.repository.PermissionRepositoryImpl;
@@ -32,6 +38,29 @@ public class PermissionDaoImpl extends PermissionRepositoryImpl implements Permi
 			.append(" where ").append(MemberRepository.USERNAME)
 			.append(" = ? ");
 		return getJdbcOps().query(select.toString(), new Object[]{username},ROW_MAPPER);
+	}
+
+	@Override
+	public Page<Permission> findByCriteria(SearchPermissionDTO search, Pageable pageable) {
+		List<Object> params = new LinkedList<>();
+		List<Permission> content = null;
+		String selectPage = null;
+		long total = 0;
+		StringBuilder select = new StringBuilder()
+			.append("SELECT * FROM ").append(TABLE_PERMISSION)
+			.append(" WHERE ").append(COL_PERID).append(" IS NOT NULL ");
+		if (search.getPerCode() != null) {
+			select.append(" AND ").append(COL_PERCODE).append(" LIKE ? ");
+			params.add("%" + StringUtils.trimToEmpty(search.getPerCode()) + "%");
+		}
+		if (search.getPerName() != null) {
+			select.append(" AND ").append(COL_PERNAME).append(" LIKE ? ");
+			params.add("%" + StringUtils.trimToEmpty(search.getPerName()) + "%");
+		}
+		selectPage = getSqlGenerator().selectAll(getTable(), select, pageable);
+		content = getJdbcOps().query(selectPage, params.toArray(), ROW_MAPPER);
+		total = count(select.toString(),params.toArray());
+		return new PageImpl<>(content, pageable, total);
 	}
 
 }

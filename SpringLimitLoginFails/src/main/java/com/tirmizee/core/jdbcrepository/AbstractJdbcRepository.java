@@ -91,7 +91,7 @@ public abstract class AbstractJdbcRepository<T extends Persistable<ID>, ID exten
 	}
 	
 	@Autowired
-	public void setDataSource(DataSource dataSource) {
+	protected void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
     }
 

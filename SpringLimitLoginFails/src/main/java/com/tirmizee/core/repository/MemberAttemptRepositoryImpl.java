@@ -9,11 +9,11 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.tirmizee.core.domain.MemberAttempt;
-import com.tirmizee.core.jdbcrepository.AbstractJdbcRepository;
+import com.tirmizee.core.jdbcrepository.AbstractMssqlRepository;
 import com.tirmizee.core.jdbcrepository.RowUnmapper;
 
 @Repository("MemberAttemptRepository")
-public class MemberAttemptRepositoryImpl extends AbstractJdbcRepository<MemberAttempt, Long> implements MemberAttemptRepository{
+public class MemberAttemptRepositoryImpl extends AbstractMssqlRepository<MemberAttempt, Long> implements MemberAttemptRepository{
 
 	public MemberAttemptRepositoryImpl() {
 		this(TABLE_MEMBERATTEMPT);

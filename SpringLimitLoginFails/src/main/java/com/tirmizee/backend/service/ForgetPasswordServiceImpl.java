@@ -120,7 +120,8 @@ public class ForgetPasswordServiceImpl implements ForgetPasswordService{
 	}
 	
 	public String generateUrl(String token){
-		String baseUrl = String.format("%s://%s:%d%s", request.getScheme(), request.getServerName(), request.getServerPort(), request.getContextPath());
+		final String FORMAT = "%s://%s:%d%s";
+		final String baseUrl = String.format(FORMAT , request.getScheme(), request.getServerName(), request.getServerPort(), request.getContextPath());
 		return baseUrl + "/ResetPassword/" + token;
 	}
 	
@@ -134,17 +135,21 @@ public class ForgetPasswordServiceImpl implements ForgetPasswordService{
 	}
 	
 	public void sendMailForgetPassword(String email,String token){
-		
-		Map<String, Object> model = new HashMap<>();
-		model.put("url", generateUrl(token));
-		
-		SimpleMailInfo info = new SimpleMailInfo();
-		info.setDate(new Date());
-		info.setFrom("tirmizee@com");
-		info.setTo("pratyay@generali.co.th");
-		info.setSubject("Reset Password");
-		info.setContent(template.load("ForgetPassword.ftl", model));
-		mailService.sendSimpleMail(info);
+		try{
+			Map<String, Object> model = new HashMap<>();
+			model.put("url", generateUrl(token));
+			
+			SimpleMailInfo info = new SimpleMailInfo();
+			info.setDate(new Date());
+			info.setFrom("tirmizee@com");
+			info.setTo(email);
+			info.setSubject("Reset Password");
+			info.setContent(template.load("ForgetPassword.ftl", model));
+			mailService.sendSimpleMail(info);
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new BussinesException(HttpStatus.CONFLICT, "Timeout");
+		}
 		
 	}
 

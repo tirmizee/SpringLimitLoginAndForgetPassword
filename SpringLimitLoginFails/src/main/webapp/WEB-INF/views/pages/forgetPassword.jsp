@@ -64,16 +64,13 @@
 	background-color: #f7f7f7;
 }
 </style>
-<title>UWDocumentControl</title>
+<title>SpringLimitLoginFails</title>
 </head>
 <body class="bg">
 	<div class="container" >
 		
 	</div>	<!-- container -->
 	<div class="login-box">
-  <div class="login-logo">
-    <a href="#"><b><font color="#d73925">Limit</font></b>Login</a>
-  </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
   	<c:if test="${not empty error}">
@@ -120,13 +117,14 @@ var ForgetPassword = function(){
 	
 	var handleButtonForgetPassword = function(){
 		$('#btnForget').on('click' , function(){
-			
+			$('.login-box').waitMe({});
 			var objectData = {
 				email : $('input[name="email"]').val()
 			};
 			
 			AjaxManager.PostData(objectData ,"api/password/forget",
 				function(response){
+				$('.login-box').waitMe("hide");
 					if (response) {
 						Swal.Success('บันทึกข้อมูล สำเร็จ');
 						$('input[name="email"]').val('')
@@ -134,7 +132,8 @@ var ForgetPassword = function(){
 				},
 				function(jqXHR, textStatus, errorThrown){
 					var error = JSON.parse(jqXHR.responseText);
-	  			   Swal.Error('Warning message', error.errorDescription );
+					$('.login-box').waitMe("hide");
+	  			    Swal.Error('Warning message', error.errorDescription );
 				}
 			);
 		});
