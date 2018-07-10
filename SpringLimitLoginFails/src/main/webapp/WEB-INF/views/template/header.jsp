@@ -66,7 +66,7 @@ var SpringHeader = function(){
 		
 		$alanguage = $('#aLanguage');
 		$alanguage.on('click',function(){
-			window.location = "?lang=" + ($splanguage.text() == 'TH' ? "en" : "th");
+			window.location = "?language=" + ($splanguage.text() == 'EN' ? "th" : "en");
 		});
 	}
 	

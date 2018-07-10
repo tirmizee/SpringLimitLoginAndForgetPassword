@@ -1,10 +1,7 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <security:authentication var="profile" property="principal" />
-  <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-      <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
           <img src="${pageContext.request.contextPath}/resources/libs/admin-lte2/img/user.png" class="img-circle" alt="User Image">
@@ -15,11 +12,12 @@
         </div>
       </div>
      
-      <!-- /.search form -->
-      <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
+        <security:authorize access="hasAnyAuthority('TR001')">
         <li class="treeview menu-index"><a href="${pageContext.request.contextPath}/main"><i class="fa fa-globe " style="height: 20px;"></i> <span>Main</span></a></li>
+        </security:authorize>
+        <security:authorize access="hasAnyAuthority('TR002','TR003')">
         <li class="treeview menu-role" >
           <a href="#">
             <i class="fa fa-briefcase" style="height: 20px;"></i>
@@ -29,13 +27,19 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="permission"><a href="${pageContext.request.contextPath}/permission"><i class="fa fa-circle-o"></i>Permission</a></li>
-            <li class="role"><a href="${pageContext.request.contextPath}/admin/role"><i class="fa fa-circle-o"></i>Assign Role</a></li>
+          	<security:authorize access="hasAnyAuthority('TR003')">
+         	<li class="role"><a href="${pageContext.request.contextPath}/role"><i class="fa fa-circle-o"></i>Roles</a></li>
+            </security:authorize>
+            <security:authorize access="hasAnyAuthority('TR002')">
+            <li class="permission"><a href="${pageContext.request.contextPath}/permission"><i class="fa fa-circle-o"></i>Assign Permission</a></li>
+         	</security:authorize>
           </ul>
         </li>
+        </security:authorize>
+        <security:authorize access="hasAnyAuthority('TR004')">
+        <li class="treeview menu-setting"><a href="${pageContext.request.contextPath}/setting"><i class="glyphicon glyphicon-cog" style="height: 20px;"></i> <span>Setting</span></a></li>
+       	</security:authorize>
        </ul>
-       
          
     </section>
-    <!-- /.sidebar -->
   </aside>

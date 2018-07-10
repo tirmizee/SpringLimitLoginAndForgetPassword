@@ -13,6 +13,7 @@ public interface PermissionRepository extends JdbcRepository<Permission, Long>{
 	public static final String COL_CREATEDATE = "createDate";
 	public static final String COL_UPDATEDATE = "updateDate";
 	
+	public static final String ALL = "Permission.*";
 	public static final String PERID = "Permission.perId";
 	public static final String PERCODE = "Permission.perCode";
 	public static final String PERNAME = "Permission.perName";

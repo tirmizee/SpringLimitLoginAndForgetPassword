@@ -37,7 +37,7 @@
   <div class="wrapper">
 
     <jsp:include page="../template/header.jsp" />
-    <jsp:include page="../template/menu_sidebar_admin.jsp" />
+    <jsp:include page="../template/menu_sidebar.jsp" />
 
 
     <!-- Content Wrapper. Contains page content -->
@@ -45,8 +45,8 @@
       <!-- Content Header (Page header) -->
       <section class="content-header">
         <h1>
-          Dashboard
-          <small>Version 0.1</small>
+          TROO1
+          <small>main page</small>
         </h1>
         <ol class="breadcrumb">
           <li><a href="#"><i class="fa fa-dashboard"></i> Home ${pageContext.response.locale}</a></li>

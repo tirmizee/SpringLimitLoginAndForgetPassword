@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.tirmizee.backend.api.permission.data.PermissionDTO;
 import com.tirmizee.backend.api.permission.data.SearchPermissionDTO;
 import com.tirmizee.core.domain.Permission;
 import com.tirmizee.core.repository.PermissionRepository;
@@ -15,4 +16,6 @@ public interface PermissionDao extends PermissionRepository{
 	
 	Page<Permission> findByCriteria(SearchPermissionDTO search, Pageable pageable);
 
+	Page<PermissionDTO> findPermissionOfRole(SearchPermissionDTO search, Pageable pageable);
+	
 }

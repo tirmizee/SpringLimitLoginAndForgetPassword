@@ -18,6 +18,11 @@ import com.tirmizee.core.exception.ICredentialsFirstloginException;
 import com.tirmizee.core.exception.ILockedException;
 import com.tirmizee.core.exception.IUsernameNotFoundException;
 
+
+/**
+ * @author Pratya Yeekhaday
+ *
+ */
 public class AuthenticationProviderImpl extends DaoAuthenticationProvider {
 	
 	public static final Logger LOG = Logger.getLogger(AuthenticationProviderImpl.class);
