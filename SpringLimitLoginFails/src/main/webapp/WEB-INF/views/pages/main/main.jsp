@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE>
 <html>
@@ -36,8 +35,8 @@
 <body class="hold-transition skin-green sidebar-mini">
   <div class="wrapper">
 
-    <jsp:include page="../template/header.jsp" />
-    <jsp:include page="../template/menu_sidebar.jsp" />
+    <jsp:include page="../../template/header.jsp" />
+    <jsp:include page="../../template/menu_sidebar.jsp" />
 
 
     <!-- Content Wrapper. Contains page content -->
@@ -122,7 +121,7 @@
       </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
 
-   <jsp:include page="../template/footer.jsp" />
+   <jsp:include page="../../template/footer.jsp" />
 
   <div class="control-sidebar-bg"></div>
 
@@ -142,6 +141,7 @@ var SpringAdminIdex = function(){
 			handleActiveMenu();
 		}
 	}
+	
 }();
 
 $(document).ready(function() {

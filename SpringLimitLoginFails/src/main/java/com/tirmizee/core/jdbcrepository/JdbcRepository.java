@@ -16,12 +16,11 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  */
 public interface JdbcRepository<T extends Persistable<ID>, ID extends Serializable> extends PagingAndSortingRepository<T, ID> {
 	
-	<S extends T> List<S> save(Iterable<S> entities);
-	
 	List<T> findAll();
-	
-	List<T> findAll(Iterable<ID> ids);
 	
 	List<T> findAll(Sort sort);
 	
+	List<T> findAll(Iterable<ID> ids);
+	
+	<S extends T> List<S> save(Iterable<S> entities);
 }

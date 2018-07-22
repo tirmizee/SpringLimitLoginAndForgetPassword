@@ -2,8 +2,10 @@ package com.tirmizee.core.security;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AccountExpiredException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.CredentialsExpiredException;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.LockedException;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.Authentication;
@@ -12,9 +14,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.tirmizee.backend.service.EnforceChangePasswordService;
 import com.tirmizee.backend.service.MemberAttemptService;
+import com.tirmizee.core.exception.IAccountExpiredException;
 import com.tirmizee.core.exception.IBadCredentialsException;
 import com.tirmizee.core.exception.ICredentialsExpiredException;
 import com.tirmizee.core.exception.ICredentialsFirstloginException;
+import com.tirmizee.core.exception.IDisabledException;
 import com.tirmizee.core.exception.ILockedException;
 import com.tirmizee.core.exception.IUsernameNotFoundException;
 
@@ -51,6 +55,10 @@ public class AuthenticationProviderImpl extends DaoAuthenticationProvider {
 				memberAttemptService.resetMemberAttempt(username);
 			}
 			return authen;
+		}catch (DisabledException e) {
+			throw new IDisabledException(username , "User account is disabled");
+		}catch (AccountExpiredException e) {
+			throw new IAccountExpiredException(username, "User account has expired");
 		}catch (UsernameNotFoundException e) {
 			throw new IUsernameNotFoundException(username, "Username not found");
 		}catch (CredentialsExpiredException e) {

@@ -2,11 +2,13 @@ package com.tirmizee.core.config;
 
 import javax.servlet.Filter;
 
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import com.tirmizee.core.filter.RequestLoggingFilter;
 
-public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer{
+public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
@@ -34,6 +36,13 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 		return new Filter[]{
 			new RequestLoggingFilter()
 		};
+	}
+	
+	@Override
+	protected DispatcherServlet createDispatcherServlet(WebApplicationContext servletAppContext) {
+		  final DispatcherServlet dispatcherServlet = new DispatcherServlet(servletAppContext);
+		  dispatcherServlet.setThrowExceptionIfNoHandlerFound(true);
+		  return dispatcherServlet;
 	}
 	
 }

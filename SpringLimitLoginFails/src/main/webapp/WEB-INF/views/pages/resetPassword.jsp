@@ -4,6 +4,8 @@
 <!DOCTYPE>
 <html>
 <head>
+ <meta name="_csrf" content="${_csrf.token}"/>
+ <meta name="_csrf_header" content="${_csrf.headerName}"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/bootstrap/css/bootstrap.min.css" >
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/ionicons/css/ionicons.min.css">

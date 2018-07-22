@@ -26,9 +26,9 @@ public class ForgetPasswordDaoImpl extends ForgetPasswordRepositoryImpl implemen
 	public ForgetPassword findByUsername(String username) {
 		try {
 			StringBuilder select = new StringBuilder()
-					.append("SELECT * FROM ").append(TABLE_FORGETPASSWORD)
-					.append(" WHERE ").append(COL_USERNAME)
-					.append(" = ? ");
+				.append("SELECT * FROM ").append(TABLE_FORGETPASSWORD)
+				.append(" WHERE ").append(COL_USERNAME)
+				.append(" = ? ");
 			return getJdbcOps().queryForObject(select.toString(), new Object[]{username} ,ROW_MAPPER);
 		} catch (EmptyResultDataAccessException e) {
 			return null;

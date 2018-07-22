@@ -48,8 +48,14 @@ public class RoleMapPermissionRepositoryImpl extends AbstractMssqlRepository<Rol
 	};
 
 	@Override
+	protected <S extends RoleMapPermission> S postUpdate(S entity) {
+		entity.setPersisted(true);
+		return entity;
+	}
+
+	@Override
 	protected <S extends RoleMapPermission> S postCreate(S entity, Number generatedId) {
-		entity.setId(generatedId.longValue());
+		entity.setPersisted(true);
 		return entity;
 	}
 

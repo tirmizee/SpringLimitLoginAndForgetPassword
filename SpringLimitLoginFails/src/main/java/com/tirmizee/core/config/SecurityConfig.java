@@ -16,12 +16,15 @@ import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.csrf.CsrfTokenRepository;
 
 import com.tirmizee.backend.dao.MemberDao;
 import com.tirmizee.backend.dao.PermissionDao;
 import com.tirmizee.core.security.AuthenticationFailureHandlerImpl;
-import com.tirmizee.core.security.AuthenticationSuccessHandlerImpl;
 import com.tirmizee.core.security.AuthenticationProviderImpl;
+import com.tirmizee.core.security.AuthenticationSuccessHandlerImpl;
+import com.tirmizee.core.security.HttpSessionCsrfTokenRepositoryImpl;
 import com.tirmizee.core.security.UserDetailsServiceImpl;
 
 @Configuration
@@ -40,13 +43,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private PermissionDao permissionDao;
 	
 	@Autowired
+	private AccessDeniedHandler  accessDeniedHandler;
+	@Autowired
 	private AuthenticationSuccessHandlerImpl successHandler;
 	
 	@Autowired
 	private AuthenticationFailureHandlerImpl failureHandler;
 	
 	@Bean
-	public PasswordEncoder passwordEncoder(){
+	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder(11);
 	}
 	
@@ -62,6 +67,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	public UserDetailsService userDetailsService() {
 		return new UserDetailsServiceImpl(memberDao, permissionDao);
+	}
+	
+	@Bean
+	public CsrfTokenRepository csrfTokenRepository(){
+		return new HttpSessionCsrfTokenRepositoryImpl();
 	}
 	
 	@Bean
@@ -82,10 +92,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-		    // unuse csrf
-			.csrf().disable()
-			.authorizeRequests()
+
+			.csrf().csrfTokenRepository(csrfTokenRepository())
 			
+			.and()
+			.authorizeRequests()
+				
 				.antMatchers( "/login",
 							  "/ForgetPassword",
 							  "/Register",
@@ -100,11 +112,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers( "/api/password/change").hasAuthority(CHANGE_PASSWAORD_EXPIRED)
 				
 				.anyRequest().authenticated()
-				
+			
+			.and()
+			.exceptionHandling().accessDeniedHandler(accessDeniedHandler)
+			
 			.and()
 		    .formLogin().loginPage("/login").permitAll()
 		    	.successHandler(successHandler)
 		    	.failureHandler(failureHandler)
+		    	
 		    .and()
 		    .sessionManagement()
 			    .maximumSessions(1)

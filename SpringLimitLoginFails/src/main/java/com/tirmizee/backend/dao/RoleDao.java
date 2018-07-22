@@ -10,5 +10,9 @@ import com.tirmizee.core.repository.RoleRepository;
 public interface RoleDao extends RoleRepository {
 	
 	Page<Role> findByCriteria(SearchRoleDTO searchCriteria, Pageable pageable);
+	
+	Role findByRoleName(String roleName);
+	
+	Role findByRoleNameAndNotExistsRoleId(String roleName,Integer roleId);
 
 }

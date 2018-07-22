@@ -4,6 +4,7 @@
 <!DOCTYPE>
 <html>
 <head>
+<META HTTP-EQUIV="REFRESH" CONTENT="${csrf_timeout_in_seconds}">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/bootstrap/css/bootstrap.min.css" >
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/ionicons/css/ionicons.min.css">
@@ -70,7 +71,7 @@
 	</div>	<!-- container -->
 	<div class="login-box">
   <div class="login-logo">
-    <a href="#"><b><font color="#d73925">Limit</font></b>Login</a>
+    <a href="#"><b><font color="#00a65a">Limit</font></b>Login</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
@@ -102,7 +103,7 @@
 		</div>
 		
 		<div class="form-group">
-			<button type="submit" class="btn btn-danger btn-block btn-flat" style="width: 100%;font-weight: 800;">Sign In</button>
+			<button type="submit" class="btn btn-success btn-block btn-flat" style="width: 100%;font-weight: 800;">Sign In</button>
 	    </div>	
 	    <div class="form-group">
 	    	<div class="input-group pull-right">

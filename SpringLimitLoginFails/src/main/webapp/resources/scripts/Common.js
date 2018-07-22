@@ -1,48 +1,74 @@
-var AjaxManager = {
-	RootUrl: '',
-	PostData : function (objToPost, postUri, onPostSuccess, onPostError) {
+var AjaxManager = function(){
+	
+	var token = $("meta[name='_csrf']").attr("content");
+
+	var header = $("meta[name='_csrf_header']").attr("content");
+	
+	var PostData = function (objToPost, postUri, onPostSuccess, onPostError) {
         $.ajax({
             type: 'POST',
             url: postUri,
             contentType: 'application/json',
             headers: {
-                'Accept': 'application/json'
+                'Accept'        : 'application/json',
+                'X-CSRF-TOKEN' : token 
             },
             data: JSON.stringify(objToPost)
         }).done(function (objRet) {
             onPostSuccess(objRet);
         }).fail(function (jqXHR, textStatus, errorThrown) {
-            onPostError(jqXHR, textStatus, errorThrown);
+        	if (onPostError !== undefined) {
+        		onPostError(jqXHR, textStatus, errorThrown);
+	    	}
         });
-    },
-    GetData: function (objToGet, getUri, onGetSuccess, onGetError) {
+    };
+    
+    var GetData = function (objToGet, getUri, onGetSuccess, onGetError) {
         $.ajax({
             type: 'GET',
             url: getUri,
             contentType: 'application/json;charset=utf-8',
             dataType: 'json',
             headers: {
-            	'Accept': 'application/json'
+            	'Accept'        : 'application/json',
+            	'X-CSRF-TOKEN' : token
             },
             data: objToGet,
         }).done(function (objRet) {
             onGetSuccess(objRet);
         }).fail(function (jqXHR, textStatus, errorThrown) {
-            onGetError(jqXHR, textStatus, errorThrown);
+	    	 if (onGetError !== undefined) {
+	    		 onGetError(jqXHR, textStatus, errorThrown);
+	    	 }
         });
-    },
-    DeleteData : function (deleteUri, onDeleteSuccess, onDeleteError) {
+    };
+    
+    var DeleteData = function (deleteUri, onDeleteSuccess, onDeleteError) {
         $.ajax({
             type: 'DELETE',
             url: deleteUri,
             contentType: 'application/json;charset=utf-8',
+            headers: {
+            	'Accept'        : 'application/json',
+            	'GT-CSRF-TOKEN' : token
+            },
         }).done(function (objRet) {
         	onDeleteSuccess(objRet);
         }).fail(function (jqXHR, textStatus, errorThrown) {
-        	onDeleteError(jqXHR, textStatus, errorThrown);
+        	if (onDeleteError !== undefined) {
+        		onDeleteError(jqXHR, textStatus, errorThrown);
+	    	 }
         });
-    }
-};
+    };
+    
+    return {
+    	GetData    : GetData,
+    	PostData   : PostData,
+    	DeleteData : DeleteData,
+    	CsrfHeader : header,
+    	CsrfToken  : token
+    };
+}();
 
 var BlockUIManager = {
 	AjaxStyleOne : function() {
@@ -57,6 +83,8 @@ var BlockUIManager = {
          }})).ajaxStop($.unblockUI);
 	}
 };
+
+
 
 var Swal = {
 	Success : function(title,text) {
@@ -74,3 +102,20 @@ var Swal = {
 			   timer: 4000 });
 	}
 };
+
+var ImagePreview = function(){
+	
+	var show = function(id, event){
+		var reader = new FileReader();
+		reader.onload = function() {
+			var output = document.getElementById(id);
+			output.src = reader.result;
+		}
+		reader.readAsDataURL(event.target.files[0]);
+	}
+	return {
+		show : show
+	};
+}();
+
+

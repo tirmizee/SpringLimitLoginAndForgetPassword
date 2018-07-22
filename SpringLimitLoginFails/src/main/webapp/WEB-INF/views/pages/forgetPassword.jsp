@@ -4,8 +4,10 @@
 <!DOCTYPE>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/bootstrap/css/bootstrap.min.css" >
+ <meta name="_csrf" content="${_csrf.token}"/>
+ <meta name="_csrf_header" content="${_csrf.headerName}"/>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/bootstrap/css/bootstrap.min.css" >
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/ionicons/css/ionicons.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/admin-lte2/css/AdminLTE.min.css">
@@ -94,7 +96,7 @@
 		</div>	
 		
 		<div class="form-group">
-			<button id="btnForget" type="button" class="btn btn-danger btn-block btn-flat" style="width: 100%;font-weight: 800;">Forget Password</button>
+			<button id="btnForget" type="button" class="btn btn-warning btn-block btn-flat" style="width: 100%;font-weight: 800;">Forget Password</button>
 	    </div>	
 	    <div class="form-group">
 	    	<div class="input-group pull-right">

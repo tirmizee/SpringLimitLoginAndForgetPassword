@@ -5,17 +5,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
+import com.tirmizee.backend.web.data.ErrorMessage;
 import com.tirmizee.core.component.MessageSourceUtils;
 import com.tirmizee.core.exception.BussinesException;
-import com.tirmizee.core.exception.ErrorMessage;
-import com.tirmizee.core.exception.UrlNotFoundException;
 
 @ControllerAdvice
 public class HandleExceptionController {
 	
 	@Autowired 
-	MessageSourceUtils messageSource;
+	private MessageSourceUtils messageSource;
 	
 	@ExceptionHandler(BussinesException.class)
 	public ResponseEntity<ErrorMessage> handleBussinesException(BussinesException ex){
@@ -26,9 +26,9 @@ public class HandleExceptionController {
 		return new ResponseEntity<>(errorMessage,ex.getStatus());
 	}
 	
-	@ExceptionHandler(UrlNotFoundException.class)
-	public ModelAndView handleUrlNotFoundException(UrlNotFoundException ex){
-		return new ModelAndView("error/404");
+	@ExceptionHandler(NoHandlerFoundException.class)
+	public ModelAndView handleNotFoundException(NoHandlerFoundException ex){
+		return new ModelAndView("redirect:/NotFound" , "RequestURL" , ex.getRequestURL());
 	}
 	
 }

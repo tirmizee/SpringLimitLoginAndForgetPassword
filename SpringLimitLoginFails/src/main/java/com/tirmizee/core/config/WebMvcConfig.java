@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
-import com.tirmizee.core.interceptor.ILocaleChangeInterceptor;
+import com.tirmizee.core.interceptor.LangaugeChangeInterceptor;
 
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurerAdapter{
@@ -45,7 +45,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter{
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		LocaleChangeInterceptor localeInterceptor = new ILocaleChangeInterceptor();
+		LocaleChangeInterceptor localeInterceptor = new LangaugeChangeInterceptor();
         localeInterceptor.setParamName("language");
         registry.addInterceptor(localeInterceptor);
 	}

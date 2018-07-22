@@ -49,4 +49,12 @@ public class RoleRepositoryImpl extends AbstractMssqlRepository<Role, Integer> i
 		}
 	};
 
+	@Override
+	protected <S extends Role> S postCreate(S entity, Number generatedId) {
+		entity.setRoleId(generatedId.intValue());
+		return entity;
+	}
+	
+	
+
 }

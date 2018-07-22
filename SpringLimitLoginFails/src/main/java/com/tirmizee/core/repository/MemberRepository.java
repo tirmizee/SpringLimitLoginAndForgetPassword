@@ -20,6 +20,7 @@ public interface MemberRepository extends JdbcRepository<Member, String>{
 	public static final String COL_UPDATEDATE = "updateDate";
 	
 	public static final String USERNAME = "Member.username";
+	public static final String EMAIL = "Member.email";
 	public static final String PASSWORD = "Member.password";
 	public static final String FKROLEID = "Member.fkRoleId";
 	public static final String ENABLED = "Member.enabled";

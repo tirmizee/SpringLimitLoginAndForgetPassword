@@ -11,34 +11,30 @@
           <a href="">Role : ${profile.roleName}</a>
         </div>
       </div>
-     
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
         <security:authorize access="hasAnyAuthority('TR001')">
-        <li class="treeview menu-index"><a href="${pageContext.request.contextPath}/main"><i class="fa fa-globe " style="height: 20px;"></i> <span>Main</span></a></li>
+        <li class="treeview menu-index"><a href="${pageContext.request.contextPath}/main"><i class="fa fa-globe" style="height: 20px;"></i> <span>Main</span></a></li>
         </security:authorize>
-        <security:authorize access="hasAnyAuthority('TR002','TR003')">
-        <li class="treeview menu-role" >
+       	<security:authorize access="hasAnyAuthority('TR003')">
+       	<li class="treeview menu-member"><a href="${pageContext.request.contextPath}/member"><i class="glyphicon glyphicon-user" style="height: 20px;"></i><span>Members</span></a></li>
+        </security:authorize>
+        <security:authorize access="hasAnyAuthority('TR002')">
+        <li class="treeview menu-role"><a href="${pageContext.request.contextPath}/role"><i class="fa fa-briefcase" style="height: 20px;"></i><span>Role Management</span></a></li>
+        </security:authorize>
+        <security:authorize access="hasAnyAuthority('TR004')">
+        <li class="treeview menu-setting">
           <a href="#">
-            <i class="fa fa-briefcase" style="height: 20px;"></i>
-            <span>Role Management</span>
+            <i class="glyphicon glyphicon-cog" style="height: 20px;"></i> <span>Setting</span>
             <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right" ></i>
+              <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-          	<security:authorize access="hasAnyAuthority('TR003')">
-         	<li class="role"><a href="${pageContext.request.contextPath}/role"><i class="fa fa-circle-o"></i>Roles</a></li>
-            </security:authorize>
-            <security:authorize access="hasAnyAuthority('TR002')">
-            <li class="permission"><a href="${pageContext.request.contextPath}/permission"><i class="fa fa-circle-o"></i>Assign Permission</a></li>
-         	</security:authorize>
+            <li><a href="${pageContext.request.contextPath}/log"><i class="fa fa-circle-o" style="height: 20px;"></i>Login Log</a></li>
           </ul>
         </li>
         </security:authorize>
-        <security:authorize access="hasAnyAuthority('TR004')">
-        <li class="treeview menu-setting"><a href="${pageContext.request.contextPath}/setting"><i class="glyphicon glyphicon-cog" style="height: 20px;"></i> <span>Setting</span></a></li>
-       	</security:authorize>
        </ul>
          
     </section>
