@@ -1,4 +1,4 @@
-package com.tirmizee.core.exception;
+package com.tirmizee.backend.web.data;
 
 import java.io.Serializable;
 
