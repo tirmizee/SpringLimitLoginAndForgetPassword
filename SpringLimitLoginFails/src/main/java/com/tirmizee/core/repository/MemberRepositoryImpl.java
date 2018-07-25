@@ -32,6 +32,7 @@ public class MemberRepositoryImpl extends AbstractMssqlRepository<Member, String
 			member.setEmail(rs.getString(COL_EMAIL));
 			member.setFkRoleId(rs.getInt(COL_FKROLEID));
 			member.setEnabled(rs.getBoolean(COL_ENABLED));
+			member.setFkMemberImgId(rs.getLong(COL_FKIMGID));
 			member.setAccountNonLocked(rs.getBoolean(COL_ACCOUNTNONLOCKED));
 			member.setAccountNonExpired(rs.getBoolean(COL_ACCOUNTNONEXPIRED));
 			member.setCredentialsNonExpired(rs.getBoolean(COL_CREDENTIALSNONEXPIRED));
@@ -50,6 +51,7 @@ public class MemberRepositoryImpl extends AbstractMssqlRepository<Member, String
 			map.put(COL_USERNAME, param.getUsername());
 			map.put(COL_PASSWORD, param.getPassword());
 			map.put(COL_FKROLEID, param.getFkRoleId());
+			map.put(COL_FKIMGID, param.getFkMemberImgId());
 			map.put(COL_EMAIL, param.getEmail());
 			map.put(COL_ENABLED, param.getEnabled());
 			map.put(COL_ACCOUNTNONLOCKED, param.getAccountNonLocked());

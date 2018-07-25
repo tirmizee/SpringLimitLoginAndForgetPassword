@@ -20,7 +20,7 @@ public class PermissionServiceImpl implements PermissionService{
 	private RoleMapPermissionDao roleMapPermissionDao;
 
 	@Override
-	public ResponseMessage createPermissionOfRole(RoleMapPermissonDTO mapPermissonDTO) {
+	public ResponseMessage createPermissionsOfRole(RoleMapPermissonDTO mapPermissonDTO) {
 		RoleMapPermission entity = new RoleMapPermission();
 		Integer roleId = mapPermissonDTO.getRoleId();
 		Long perId = mapPermissonDTO.getPerId();

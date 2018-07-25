@@ -1,9 +1,11 @@
 package com.tirmizee.core.config;
 
+import java.io.IOException;
 import java.util.Locale;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -28,6 +30,13 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter{
 	    resolver.setCookieName("Language");
 	    resolver.setCookieMaxAge(30*60);
 	    return resolver;
+    }
+	
+	@Bean(name = "multipartResolver") 
+    public CommonsMultipartResolver multipartResolver() throws IOException{
+        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+        resolver.setMaxUploadSizePerFile(5242880);
+        return resolver;
     }
 	
 	@Override

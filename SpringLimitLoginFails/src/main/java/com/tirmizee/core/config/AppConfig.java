@@ -41,6 +41,8 @@ public class AppConfig {
         return mailSender;
 	}
 	
+	
+	
 	@Bean
 	public freemarker.template.Configuration freemarker(){
 		freemarker.template.Configuration configuration =  new freemarker.template.Configuration(

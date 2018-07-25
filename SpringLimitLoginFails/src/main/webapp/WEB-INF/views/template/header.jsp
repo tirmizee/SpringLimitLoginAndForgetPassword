@@ -23,18 +23,17 @@
               <i class="fa fa-language " style="height: 20px;font-size:20px"></i>
               <span id="spLanguage" class="label label-warning">${pageContext.response.locale}</span>
             </a>
-           
           </li>
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="${pageContext.request.contextPath}/resources/libs/admin-lte2/img/user.png" class="user-image" alt="User Image">
+              <img src="${pageContext.request.contextPath}/file/resource/img/profile" class="user-image" alt="User Image">
               <span class="hidden-xs">${profile.username}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="${pageContext.request.contextPath}/resources/libs/admin-lte2/img/user.png" class="img-circle" alt="User Image">
+                <img src="${pageContext.request.contextPath}/file/resource/img/profile" class="img-circle" alt="User Image">
                 <p>
                   ${user.firstName} ${user.lastName} - Web Developer
                   <small>Member since Nov. 2012</small>
@@ -59,8 +58,8 @@
       </div>  <!--end Navbar Right Menu -->
     </nav>
   </header>
-  
 <script>
+
 var SpringHeader = function(){
 	
 	var handleLanguage = function () {

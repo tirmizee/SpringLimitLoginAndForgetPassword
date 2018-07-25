@@ -50,7 +50,7 @@ var AjaxManager = function(){
             contentType: 'application/json;charset=utf-8',
             headers: {
             	'Accept'        : 'application/json',
-            	'GT-CSRF-TOKEN' : token
+            	'X-CSRF-TOKEN'  : token
             },
         }).done(function (objRet) {
         	onDeleteSuccess(objRet);
@@ -61,10 +61,30 @@ var AjaxManager = function(){
         });
     };
     
+    var UploadData = function (formData, postUri, onPostSuccess, onPostError) {
+        $.ajax({
+        	processData: false,
+            contentType: false,
+            headers: {
+            	'X-CSRF-TOKEN' : token
+            },
+            async: false,
+            cache: false,
+        	type: 'POST',
+            url: postUri,
+            data: formData
+        }).done(function (objRet) {
+            onPostSuccess(objRet);
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            onPostError(jqXHR, textStatus, errorThrown);
+        });
+    }
+    
     return {
     	GetData    : GetData,
     	PostData   : PostData,
     	DeleteData : DeleteData,
+    	UploadData : UploadData,
     	CsrfHeader : header,
     	CsrfToken  : token
     };
@@ -84,8 +104,6 @@ var BlockUIManager = {
 	}
 };
 
-
-
 var Swal = {
 	Success : function(title,text) {
 		swal({ type  : 'success',  
@@ -95,6 +113,13 @@ var Swal = {
 			   timer: 3000  });
 	},
 	Error : function(title,text) {
+		swal({ type  : 'error', 
+			   title : title,  
+			   text  : text, 
+			   showConfirmButton : false, 
+			   timer: 4000 });
+	},
+	Warning : function(title,text) {
 		swal({ type  : 'warning', 
 			   title : title,  
 			   text  : text, 

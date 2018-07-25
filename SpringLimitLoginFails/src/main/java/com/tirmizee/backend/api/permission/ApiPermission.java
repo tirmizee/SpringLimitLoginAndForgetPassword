@@ -53,7 +53,7 @@ public class ApiPermission {
 	@PreAuthorize("hasAnyAuthority('TR002')")
 	@PostMapping(path = "/createRoleMapPermission")
 	public ResponseMessage createRoleMapPermission(@RequestBody RoleMapPermissonDTO request){
-		return permissionService.createPermissionOfRole(request);
+		return permissionService.createPermissionsOfRole(request);
 	}
 	
 	@PreAuthorize("hasAnyAuthority('TR002')")

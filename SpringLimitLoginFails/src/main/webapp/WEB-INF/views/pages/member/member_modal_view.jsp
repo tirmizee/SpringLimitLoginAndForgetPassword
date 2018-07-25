@@ -9,7 +9,7 @@
 			</div>
 			<div class="modal-body">
 				<div class="box-body box-profile">
-					<img class="profile-user-img img-responsive img-circle" src="${pageContext.request.contextPath}/resources/libs/admin-lte2/img/user.png" alt="User profile picture">
+					<img id="imgProfile" class="profile-user-img img-responsive img-circle" src="${pageContext.request.contextPath}/file/resource/img/profile" alt="User profile picture">
 					<h3 class="profile-username text-center">Software Engineer</h3>
 				</div>
 				<hr>

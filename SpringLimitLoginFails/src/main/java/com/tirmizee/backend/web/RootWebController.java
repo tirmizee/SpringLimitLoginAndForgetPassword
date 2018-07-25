@@ -18,7 +18,7 @@ import com.tirmizee.core.exception.UrlNotFoundException;
 @Controller
 public class RootWebController {
 	
-	private static Logger LOG = Logger.getLogger(RootWebController.class);
+	public static Logger LOG = Logger.getLogger(RootWebController.class);
 	
 	@Autowired
 	private ForgetPasswordDao forgetPasswordDao;
@@ -34,9 +34,7 @@ public class RootWebController {
 	@GetMapping(value = "/login")
 	public ModelAndView login(@RequestParam(required = false) String error){
         ModelAndView model = new ModelAndView("index");
-		if (error != null) {
-			model.addObject("error",error);
-		}
+		if (error != null){	model.addObject("error",error); }
 		return model;
 	}
 	

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions"   prefix = "fn" %>
+<%@ taglib uri = "http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE>
 <html>
 <head>
@@ -87,7 +88,7 @@
 		
 				<div class="box box-primary">
 					<div class="box-body box-profile">
-						<img class="profile-user-img img-responsive img-circle" src="${pageContext.request.contextPath}/resources/libs/admin-lte2/img/rin.png" alt="User profile picture">
+						<img class="profile-user-img img-responsive img-circle" src="${pageContext.request.contextPath}/file/resource/img/profile" alt="User profile picture">
 		
 						<h3 class="profile-username text-center">Nina Mcintire</h3>
 		
@@ -107,11 +108,11 @@
 							
 						</div>
 						<div class="tab-pane" id="edit_profile">
-							<form action="" method="post" class="form-horizontal" enctype="multipart/form-data">
+							<form  id="frmChangeProfile" action="${pageContext.request.contextPath}/api/image/changeProfile" method="post" class="form-horizontal" enctype="multipart/form-data">
 								<div class="row">
 									<div class="col-md-4 col-md-offset-4">
 										<div class="form-group ">
-											<img id="imgPreview" class="profile-user-img-custom img-responsive img-circle" src="${pageContext.request.contextPath}/resources/libs/admin-lte2/img/rin.png">
+											<img id="imgPreview" class="profile-user-img-custom img-responsive img-circle" src="${pageContext.request.contextPath}/file/resource/img/profile">
 											<br>
 											<input name="imgProfile" type="file" accept="image/*"  class="form-control ">
 											
@@ -121,20 +122,21 @@
 								<div class="form-group">
 									<label for="inputName" class="col-sm-2 control-label">Name</label>
 									<div class="col-sm-9">
-										<input type="email" class="form-control" id="inputName" placeholder="Name">
+										<input name="name" type="text" class="form-control" placeholder="Name">
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="inputName" class="col-sm-2 control-label">Name</label>
+									<label for="inputName" class="col-sm-2 control-label">email</label>
 									<div class="col-sm-9">
-										<input type="email" class="form-control" id="inputName" placeholder="Name">
+										<input type="email" class="form-control"  placeholder="Name">
 									</div>
 								</div>
 				                <div class="form-group">
 				                    <div class="col-sm-offset-2 col-sm-10">
-				                   		<button type="submit" class="btn btn-danger">Save</button>
+				                   		<button id="btnSave" type="button" class="btn btn-danger">Save</button>
 				                     </div>
 			                	</div>
+			                	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />	
 							</form>
 						</div>
 					</div>
@@ -162,9 +164,23 @@ var Profile = function(){
 		});
 	}
 	
+	var handleButtonSave = function(){
+		$('#btnSave').on('click', function(){
+			var $form_data = $('#frmChangeProfile')
+			AjaxManager.UploadData(new FormData($form_data[0]),'api/image/updateProfile',
+				function(response){
+			
+				},function (jqXHR, textStatus, errorThrown) {
+
+				}
+			);
+		});
+	}
+	
 	return {
 		init : function(){
 			handleInputImageProfile();
+			handleButtonSave();
 		}
 	};
 	

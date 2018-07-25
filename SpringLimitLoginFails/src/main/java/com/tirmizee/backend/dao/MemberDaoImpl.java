@@ -19,6 +19,7 @@ import com.tirmizee.backend.api.member.data.SearchMemberDTO;
 import com.tirmizee.core.domain.Member;
 import com.tirmizee.core.domain.MemberAndRole;
 import com.tirmizee.core.repository.ForgetPasswordRepository;
+import com.tirmizee.core.repository.MemberImageRepository;
 import com.tirmizee.core.repository.MemberRepositoryImpl;
 import com.tirmizee.core.repository.RoleRepository;
 
@@ -33,6 +34,8 @@ public class MemberDaoImpl extends MemberRepositoryImpl implements MemberDao {
 			memberAndRole.setPassword(rs.getString(COL_PASSWORD));
 			memberAndRole.setEmail(rs.getString(COL_EMAIL));
 			memberAndRole.setFkRoleId(rs.getInt(COL_FKROLEID));
+			memberAndRole.setFkMemberImgId(rs.getLong(COL_FKIMGID));
+			memberAndRole.setImgName(rs.getString(MemberImageRepository.COL_IMG_NAME));
 			memberAndRole.setEnabled(rs.getBoolean(COL_ENABLED));
 			memberAndRole.setAccountNonLocked(rs.getBoolean(COL_ACCOUNTNONLOCKED));
 			memberAndRole.setAccountNonExpired(rs.getBoolean(COL_ACCOUNTNONEXPIRED));
@@ -146,6 +149,8 @@ public class MemberDaoImpl extends MemberRepositoryImpl implements MemberDao {
 				.append("SELECT * FROM ").append(TABLE_MEMBER)
 				.append(" JOIN ").append(RoleRepository.TABLE_ROLE)
 				.append(" ON ").append(FKROLEID).append(" = ").append(RoleRepository.ROLEID)
+				.append(" JOIN ").append(MemberImageRepository.TABLE_MEMBERIMAGE)
+				.append(" ON ").append(FKIMGID).append(" = ").append(MemberImageRepository.ID)
 				.append(" WHERE ").append(USERNAME).append(" = ? ");
 			return getJdbcOps().queryForObject(select.toString(), new Object[]{username}, MEMBER_AND_ROLE_MAPPER);
 		} catch (EmptyResultDataAccessException e) {

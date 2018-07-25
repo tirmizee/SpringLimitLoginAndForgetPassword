@@ -10,14 +10,18 @@ public class UserProfile extends UserDetailsImpl {
 	private String lastName;
 	private String roleName;
 	private String accessIp;
+	private Long fkMemberImgId;
 	private boolean initialLogin;
 	private Timestamp credentialsExpiredDate;
+	
+	
 	
 	public UserProfile(Builder builder) {
 		super(builder);
 		this.fistName = builder.fistName;
 		this.lastName = builder.lastName;
 		this.roleName = builder.roleName;
+		this.fkMemberImgId = builder.fkMemberImgId;
 		this.accessIp = builder.accessIp;
 		this.initialLogin = builder.initialLogin;
 		this.credentialsExpiredDate = builder.credentialsExpiredDate;
@@ -44,6 +48,12 @@ public class UserProfile extends UserDetailsImpl {
 	public String getAccessIp() {
 		return accessIp;
 	}
+	public Long getFkMemberImgId() {
+		return fkMemberImgId;
+	}
+	public void setFkMemberImgId(Long fkMemberImgId) {
+		this.fkMemberImgId = fkMemberImgId;
+	}
 	public void setAccessIp(String accessIp) {
 		this.accessIp = accessIp;
 	}
@@ -65,6 +75,7 @@ public class UserProfile extends UserDetailsImpl {
 		private String fistName;
 		private String lastName;
 		private String roleName;
+		private Long fkMemberImgId;
 		private String accessIp;
 		private boolean initialLogin;
 		private Timestamp credentialsExpiredDate;
@@ -83,6 +94,11 @@ public class UserProfile extends UserDetailsImpl {
 		
 		public Builder roleName(String roleName){
 			this.roleName = roleName;
+			return this;
+		}
+		
+		public Builder fkMemberImgId(Long fkMemberImgId){
+			this.fkMemberImgId = fkMemberImgId;
 			return this;
 		}
 		

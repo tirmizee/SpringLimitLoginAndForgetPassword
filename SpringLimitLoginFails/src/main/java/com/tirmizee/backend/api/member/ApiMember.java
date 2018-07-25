@@ -3,8 +3,10 @@ package com.tirmizee.backend.api.member;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +22,7 @@ import com.tirmizee.backend.api.member.data.MemberDTO;
 import com.tirmizee.backend.api.member.data.MemberEnabledDTO;
 import com.tirmizee.backend.api.member.data.MemberProfile;
 import com.tirmizee.backend.api.member.data.MemberUpdateDTO;
-import com.tirmizee.backend.api.member.data.RegisterDto;
+import com.tirmizee.backend.api.member.data.RegisterDTO;
 import com.tirmizee.backend.api.member.data.SearchMemberDTO;
 import com.tirmizee.backend.dao.MemberDao;
 import com.tirmizee.backend.service.MemberService;
@@ -53,7 +55,7 @@ public class ApiMember {
 	}
 	
 	@PostMapping(path = "/register")
-	public Boolean register(@RequestBody @Valid RegisterDto registerDto){
+	public Boolean register(@RequestBody @Valid RegisterDTO registerDto){
 		return memberService.registerMember(registerDto);
 	}
 	
@@ -104,6 +106,12 @@ public class ApiMember {
 	@GetMapping(path = "/getProfile/{username}")
 	public MemberProfile getProfile(@PathVariable String username){
 		return memberDao.findProfileByUsername(username);
+	}
+	
+	@PreAuthorize("hasAnyAuthority('TR003')")
+	@GetMapping(path = "/getImageProfile/{username}", produces = { MediaType.IMAGE_JPEG_VALUE,	MediaType.IMAGE_PNG_VALUE })
+	public Resource getProfileImage(@PathVariable String username){
+		return memberService.getImageProfile(username);
 	}
 	
 }

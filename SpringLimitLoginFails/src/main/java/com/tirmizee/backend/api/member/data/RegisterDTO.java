@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javax.validation.constraints.NotNull;
 
-public class RegisterDto implements Serializable{
+public class RegisterDTO implements Serializable{
 
 	private static final long serialVersionUID = -3247340123940969166L;
 	

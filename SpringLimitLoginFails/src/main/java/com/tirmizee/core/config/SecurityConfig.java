@@ -44,6 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private AccessDeniedHandler  accessDeniedHandler;
+
 	@Autowired
 	private AuthenticationSuccessHandlerImpl successHandler;
 	
@@ -91,6 +92,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+
 		http
 
 			.csrf().csrfTokenRepository(csrfTokenRepository())

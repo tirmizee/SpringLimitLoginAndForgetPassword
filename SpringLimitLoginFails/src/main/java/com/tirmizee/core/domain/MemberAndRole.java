@@ -10,6 +10,7 @@ public class MemberAndRole extends Member implements Serializable {
 	private Integer roleId;
 	private String roleName;
 	private String roleDesc;
+	private String imgName;
 	private Timestamp createDate;
 	private Timestamp updateDate;
 	
@@ -30,6 +31,12 @@ public class MemberAndRole extends Member implements Serializable {
 	}
 	public void setRoleDesc(String roleDesc) {
 		this.roleDesc = roleDesc;
+	}
+	public String getImgName() {
+		return imgName;
+	}
+	public void setImgName(String imgName) {
+		this.imgName = imgName;
 	}
 	public Timestamp getCreateDate() {
 		return createDate;

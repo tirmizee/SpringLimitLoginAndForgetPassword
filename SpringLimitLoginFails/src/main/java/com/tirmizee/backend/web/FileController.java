@@ -3,22 +3,25 @@ package com.tirmizee.backend.web;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.ServletContext;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.support.ServletContextResource;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView;
 
+import com.tirmizee.backend.dao.MemberImageDao;
+import com.tirmizee.backend.service.StorageImageServiceImpl;
+import com.tirmizee.core.annotaion.CurrentUser;
 import com.tirmizee.core.annotaion.GetMappingPdf;
 import com.tirmizee.core.component.ResourceHelper;
+import com.tirmizee.core.security.UserProfile;
 
 import net.sf.jasperreports.engine.JREmptyDataSource;
 
@@ -26,11 +29,11 @@ import net.sf.jasperreports.engine.JREmptyDataSource;
 @RequestMapping("file")
 public class FileController {
 	
-	@Autowired 
-	private ApplicationContext appContext;
+	@Autowired
+	private MemberImageDao memberImageDao;
 	
 	@Autowired 
-	private ServletContext servletContext;
+	private ApplicationContext appContext;
 	
 	@GetMappingPdf(path = "/pdf")
 	public ModelAndView generatePdf(){
@@ -45,9 +48,13 @@ public class FileController {
 	}
 	
 	@ResponseBody
-	@RequestMapping( value = "/image-resource", method = RequestMethod.GET,produces = { MediaType.IMAGE_JPEG_VALUE,	MediaType.IMAGE_PNG_VALUE })
-	public Resource getImageAsResource() {
-	   return new ServletContextResource(servletContext, "/WEB-INF/images/rin.png");
+	@GetMapping( value = "/resource/img/profile", produces = { MediaType.IMAGE_JPEG_VALUE,	MediaType.IMAGE_PNG_VALUE })
+	public Resource imageProfile(@CurrentUser UserProfile profile) throws NoHandlerFoundException {
+		String imgName = memberImageDao.findOne(profile.getFkMemberImgId()).getImgName();
+		Resource resource = new FileSystemResource( StorageImageServiceImpl.UPLOAD_PATH + imgName + ".png");
+		return resource;
 	}
+	
+	
 	
 }

@@ -16,10 +16,8 @@ public class PermissionDTO implements Serializable{
 	@SortColumn(value = PermissionRepository.COL_PERCODE)
 	private String perCode;
 	
-	
 	@SortColumn(value = PermissionRepository.COL_PERNAME)
 	private String perName;
-	
 	
 	@SortColumn(value = PermissionRepository.COL_PERDESC)
 	private String perDesc;

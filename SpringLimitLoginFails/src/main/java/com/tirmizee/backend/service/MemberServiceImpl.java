@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,12 +16,15 @@ import com.tirmizee.backend.api.member.data.MemberAccountNonLockedDTO;
 import com.tirmizee.backend.api.member.data.MemberCredentialsNonExpiredDTO;
 import com.tirmizee.backend.api.member.data.MemberEnabledDTO;
 import com.tirmizee.backend.api.member.data.MemberUpdateDTO;
-import com.tirmizee.backend.api.member.data.RegisterDto;
+import com.tirmizee.backend.api.member.data.RegisterDTO;
 import com.tirmizee.backend.dao.MemberDao;
+import com.tirmizee.backend.dao.MemberImageDao;
 import com.tirmizee.backend.web.data.ResponseMessage;
 import com.tirmizee.core.component.PageMapper;
 import com.tirmizee.core.domain.Member;
+import com.tirmizee.core.domain.MemberImage;
 import com.tirmizee.core.exception.BussinesException;
+import com.tirmizee.core.exception.UrlNotFoundException;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -31,10 +36,13 @@ public class MemberServiceImpl implements MemberService {
 	private MemberDao memberDao;
 	
 	@Autowired
+	private MemberImageDao memberImageDao;
+	
+	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
 	@Override
-	public Boolean registerMember(RegisterDto registerDto) {
+	public Boolean registerMember(RegisterDTO registerDto) {
 		
 		checkUsername(registerDto.getUsername());
 		
@@ -120,6 +128,15 @@ public class MemberServiceImpl implements MemberService {
 	private Timestamp plus60Days(){
 		LocalDateTime localDateTime = LocalDateTime.now().plusDays(60);
 		return Timestamp.valueOf(localDateTime);
+	}
+
+	@Override
+	public Resource getImageProfile(String username) {
+		MemberImage image = memberImageDao.findByUsername(username);
+		if (image == null) {
+			throw new UrlNotFoundException();
+		}
+		return new FileSystemResource( StorageImageServiceImpl.UPLOAD_PATH + image.getImgOriginalName());
 	}
 
 }

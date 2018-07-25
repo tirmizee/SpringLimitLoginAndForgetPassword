@@ -40,6 +40,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 				.username(username)
 				.password(member.getPassword())
 				.roleName(member.getRoleName())
+				.fkMemberImgId(member.getFkMemberImgId())
 				.authorities(grantAuthorities(permissions))
 				.enabled(member.getEnabled())
 				.accountNonExpired(member.getAccountNonExpired())

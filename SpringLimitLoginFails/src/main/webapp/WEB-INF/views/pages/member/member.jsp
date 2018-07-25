@@ -81,6 +81,7 @@
 
     <jsp:include page="../../template/header.jsp" />
     <jsp:include page="../../template/menu_sidebar.jsp" />
+	<input type="hidden" name="rootUrl" value="${pageContext.request.contextPath}" />		
 
     <div class="content-wrapper">
       
@@ -212,6 +213,7 @@ var Member = function(){
 	var DataTable = {};
 	var rowSelected = {};
 	var searchMember = {};
+	var rootUrl = $('input[name="rootUrl"]').val();
 	
 	var InitializeSelect2 = function(){
 		$('.select2').select2();
@@ -559,7 +561,7 @@ var Member = function(){
 						$('#frmViewMember input[name="accountNonExpired"]').val(_toYesOrNo(response.accountNonExpired));
 						$('#frmViewMember input[name="credentialsNonExpired"]').val(_toYesOrNo(response.credentialsNonExpired));
 						$('#frmViewMember input[name="credentialsExpiredDate"]').val( response.credentialsExpiredDate);
-						
+						$("#imgProfile").attr("src", rootUrl + "/api/member/getImageProfile/" + data.username);
 					}
 				},
 				function(jqXHR, textStatus, errorThrown){

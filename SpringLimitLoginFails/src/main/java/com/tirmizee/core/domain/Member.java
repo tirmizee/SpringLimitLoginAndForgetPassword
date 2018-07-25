@@ -15,6 +15,7 @@ public class Member implements Persistable<String>{
 	private String username;
 	private String password;
 	private Integer fkRoleId;
+	private Long fkMemberImgId;
 	private String email;
 	private Boolean enabled;
 	private Boolean accountNonLocked;
@@ -41,6 +42,14 @@ public class Member implements Persistable<String>{
 
 	public void setPersisted(boolean persisted) {
 		this.persisted = persisted;
+	}
+	
+	public Long getFkMemberImgId() {
+		return fkMemberImgId;
+	}
+
+	public void setFkMemberImgId(Long fkMemberImgId) {
+		this.fkMemberImgId = fkMemberImgId;
 	}
 
 	public String getUsername() {

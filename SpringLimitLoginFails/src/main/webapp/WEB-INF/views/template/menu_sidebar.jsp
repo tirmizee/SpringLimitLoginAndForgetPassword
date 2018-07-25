@@ -4,7 +4,7 @@
     <section class="sidebar">
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="${pageContext.request.contextPath}/resources/libs/admin-lte2/img/user.png" class="img-circle" alt="User Image">
+          <img src="${pageContext.request.contextPath}/file/resource/img/profile" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>${profile.username}</p>

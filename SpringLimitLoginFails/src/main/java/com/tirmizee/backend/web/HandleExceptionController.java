@@ -10,6 +10,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import com.tirmizee.backend.web.data.ErrorMessage;
 import com.tirmizee.core.component.MessageSourceUtils;
 import com.tirmizee.core.exception.BussinesException;
+import com.tirmizee.core.exception.UrlNotFoundException;
 
 @ControllerAdvice
 public class HandleExceptionController {
@@ -29,6 +30,11 @@ public class HandleExceptionController {
 	@ExceptionHandler(NoHandlerFoundException.class)
 	public ModelAndView handleNotFoundException(NoHandlerFoundException ex){
 		return new ModelAndView("redirect:/NotFound" , "RequestURL" , ex.getRequestURL());
+	}
+	
+	@ExceptionHandler(UrlNotFoundException.class)
+	public ModelAndView handleNotFoundUrlNotFoundException(UrlNotFoundException ex){
+		return new ModelAndView("redirect:/NotFound" , "RequestURL" , "");
 	}
 	
 }

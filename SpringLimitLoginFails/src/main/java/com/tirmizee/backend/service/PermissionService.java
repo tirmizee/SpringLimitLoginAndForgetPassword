@@ -5,7 +5,7 @@ import com.tirmizee.backend.web.data.ResponseMessage;
 
 public interface PermissionService {
 
-	ResponseMessage createPermissionOfRole(RoleMapPermissonDTO mapPermissonDTO);
+	ResponseMessage createPermissionsOfRole(RoleMapPermissonDTO mapPermissonDTO);
 	
 	ResponseMessage deletePermissionOfRole(RoleMapPermissonDTO mapPermissonDTO);
 	
