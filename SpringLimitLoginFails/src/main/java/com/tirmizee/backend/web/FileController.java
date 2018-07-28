@@ -40,7 +40,8 @@ public class FileController {
 		Map<String, Object> params = new HashMap<>();
 		params.put("firstname", "Pratya");
 		params.put("datasource", new JREmptyDataSource());
-		params.put("logo", ResourceHelper.getPath("picture/logo.jpg"));
+		params.put("net.sf.jasperreports.default.pdf.encoding", "Identity-H");
+		params.put("logo", ResourceHelper.getPath("picture/checkbox-true.png"));
 		JasperReportsPdfView view = new JasperReportsPdfView();
 	    view.setUrl("classpath:report/payment.jrxml");
 	    view.setApplicationContext(appContext);

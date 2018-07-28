@@ -16,6 +16,9 @@
         <security:authorize access="hasAnyAuthority('TR001')">
         <li class="treeview menu-index"><a href="${pageContext.request.contextPath}/main"><i class="fa fa-globe" style="height: 20px;"></i> <span>Main</span></a></li>
         </security:authorize>
+         <security:authorize access="hasAnyAuthority('TR005')">
+        <li class="treeview menu-dealing"><a href="${pageContext.request.contextPath}/dealing"><i class="glyphicon glyphicon-credit-card" style="height: 20px;"></i> <span>Dealing</span></a></li>
+        </security:authorize>
        	<security:authorize access="hasAnyAuthority('TR003')">
        	<li class="treeview menu-member"><a href="${pageContext.request.contextPath}/member"><i class="glyphicon glyphicon-user" style="height: 20px;"></i><span>Members</span></a></li>
         </security:authorize>

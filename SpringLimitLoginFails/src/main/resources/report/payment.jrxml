@@ -10,10 +10,13 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="67" splitType="Stretch">
 			<staticText>
 				<reportElement x="264" y="37" width="100" height="30" uuid="caec8e99-214c-4416-aea1-3c41a65264e0"/>
-				<text><![CDATA[Static Text]]></text>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[ประกาศ fds]]></text>
 			</staticText>
 		</band>
 	</title>

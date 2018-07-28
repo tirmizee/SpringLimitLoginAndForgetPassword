@@ -56,7 +56,7 @@ public class AuthenticationFailureHandlerImpl implements AuthenticationFailureHa
 			final String username = firstloginEx.getUsername();
 			SecurityContextHolderUtils.grantAuthority(username, SecurityConfig.FORCE_CHANGE_PASSWAORD);
 			request.setAttribute("username", username);
-			determineUrl(request, response, "/ForcePasswordChange");
+			determineForwardUrl(request, response, "/ForcePasswordChange");
 	
 		}else if(exception instanceof ICredentialsExpiredException) {
 			
@@ -64,13 +64,13 @@ public class AuthenticationFailureHandlerImpl implements AuthenticationFailureHa
 			final String username = credentialsExpiredEx.getUsername();
 			SecurityContextHolderUtils.grantAuthority(username,SecurityConfig.CHANGE_PASSWAORD_EXPIRED);
 			request.setAttribute("username", username);
-			determineUrl(request, response, "/ForcePasswordChangeExpired" );
+			determineForwardUrl(request, response, "/ForcePasswordChangeExpired" );
 		
 		}
 		
 	}
 	
-	private void determineUrl( HttpServletRequest request, HttpServletResponse response, String url)
+	private void determineForwardUrl( HttpServletRequest request, HttpServletResponse response, String url)
 			throws ServletException, IOException{
 		request.getRequestDispatcher(url).forward(request, response);
 	}

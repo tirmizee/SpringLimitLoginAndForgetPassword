@@ -48,4 +48,10 @@ public class WebController {
 		return new ModelAndView("pages/log/log");
 	}
 	
+	@PreAuthorize("hasAnyAuthority('TR005')")
+	@GetMapping(path = "/dealing")
+	public ModelAndView dealing(){
+		return new ModelAndView("pages/dealing/dealing");
+	}
+	
 }
