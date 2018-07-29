@@ -178,6 +178,8 @@
 				                 </select>
 							</div>
 						</div>
+						<div class="col-md-6">
+						</div>
 					</div>
 					<div class="row text-center">
 						<button id="btnClear" type="button" class="btn btn-default">Clear</button>
