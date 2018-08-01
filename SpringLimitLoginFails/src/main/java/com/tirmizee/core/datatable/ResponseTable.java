@@ -11,7 +11,7 @@ import org.springframework.data.domain.Page;
  * @param <T> Type Object Return
  * @see https://datatables.net/manual/server-side
  */
-public class ResponseTable<T> implements Serializable{
+public class ResponseTable<T extends Serializable> implements Serializable{
 	
 	private static final long serialVersionUID = -5613820424038079143L;
 	

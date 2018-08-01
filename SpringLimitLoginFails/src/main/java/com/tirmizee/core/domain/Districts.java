@@ -46,6 +46,7 @@ public class Districts implements Persistable<Integer> {
 	public Integer getId() {
 		return districtId;
 	}
+	
 	@Override
 	public boolean isNew() {
 		return districtId == null;

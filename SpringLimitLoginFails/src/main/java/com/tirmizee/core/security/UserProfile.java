@@ -14,8 +14,6 @@ public class UserProfile extends UserDetailsImpl {
 	private boolean initialLogin;
 	private Timestamp credentialsExpiredDate;
 	
-	
-	
 	public UserProfile(Builder builder) {
 		super(builder);
 		this.fistName = builder.fistName;

@@ -29,10 +29,13 @@ public class DistrictsDaoImpl extends DistrictsRepositoryImpl implements Distric
 		StringBuilder statement = new StringBuilder()
 			.append(" SELECT * FROM ").append(TABLE_DISTRICTS)
 			.append(" WHERE ").append(COL_FK_PROVINCEID).append(" = ? ")
-			.append(" AND ")
-			.append(COL_DISTRICTNAMETH).append(" LIKE ? ");
+			.append(" AND (")
+			.append(COL_DISTRICTNAMETH).append(" LIKE ? ")
+			.append(" OR ")
+			.append(COL_DISTRICTNAMEEN).append(" LIKE ? )");
 		
 		params.add(search.getProvinceId());
+		params.add("%" + StringUtils.trimToEmpty(search.getTerm()) + "%");
 		params.add("%" + StringUtils.trimToEmpty(search.getTerm()) + "%");
 		
 		String statementPage =  getSqlGenerator().selectAll(getTable(), statement, pageable);

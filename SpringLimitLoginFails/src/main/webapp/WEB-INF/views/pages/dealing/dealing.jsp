@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/datatables/css/buttons.dataTables.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/datatables/css/colReorder.dataTables.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/datatables/css/responsive.dataTables.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/datatables/css/select.dataTables.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/bootstrap-toggle/css/bootstrap-toggle.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/sweetalert2/css/sweetalert2.min.css">
  
@@ -38,6 +39,7 @@
   <script src="${pageContext.request.contextPath}/resources/libs/datatables/js/dataTables.buttons.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/libs/datatables/js/dataTables.colReorder.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/libs/datatables/js/dataTables.responsive.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/libs/datatables/js/dataTables.select.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/libs/bootstrap-toggle/js/bootstrap-toggle.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/libs/sweetalert2/js/sweetalert2.all.js"></script>
   
@@ -55,6 +57,15 @@
      }
      .toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px}
   	 .toggle.ios .toggle-handle { border-radius: 20px; }
+  	 .input-group-disabled{
+     	background-color: #eeeeee !important;
+     }
+     .color-white{
+     	color:#ffffff !important;
+     }
+     .bg-color-info{
+     	background-color: #00c0ef;
+     }
   </style>
   
   <title>SpringLimitLoginFails</title>
@@ -81,9 +92,80 @@
 
 	  
 	<section class="content">
+	
 		<div class="box box-default">
 			<div class="box-header with-border">
-				<h3 class="box-title">Dealing</h3>
+				<h3 class="box-title">Personal Information</h3>
+				<div class="box-tools pull-right">
+					<a type="button" class="btn btn-box-tool" data-widget="collapse">
+						<i class="fa fa-minus"></i>
+					</a>
+				</div>
+			</div><!-- /.box-header -->
+	
+			<div class="box-body">
+				<form id="frmCustomer">
+					<div class="row">
+						<div class="col-md-3">
+							<div class="form-group">
+								<label>Code</label>
+								<div class="input-group">
+									<span class="input-group-addon input-group-disabled"><i class="fa fa-user"></i></span>
+									<input name="customerCode" type="text" class="form-control" placeholder="" readonly>
+									<span class="input-group-btn">
+				                    	<button id="btnTrigerModal" type="button" class="btn btn-info btn-flat"><b>Search</b></button>
+				                    </span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>First Name</label>
+								<div class="input-group">
+									<span class="input-group-addon input-group-disabled"><i class="fa fa-user"></i></span>
+									<input name="customerName" type="text" class="form-control" placeholder="" readonly>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>Last Name</label>
+								<div class="input-group">
+									<span class="input-group-addon input-group-disabled"><i class="fa fa-user"></i></span>
+									<input name="customerSurname" type="text" class="form-control" placeholder="" readonly>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>Mobile</label>
+								<div class="input-group">
+									<span class="input-group-addon input-group-disabled"><i class="fa fa-phone"></i></span>
+									<input name="customerMobile" type="text" class="form-control" placeholder="" readonly>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>Email</label>
+								<div class="input-group">
+									<span class="input-group-addon input-group-disabled"><i class="fa fa-envelope"></i></span>
+									<input name="customerEmail" type="text" class="form-control" placeholder="" readonly>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	
+		<div class="box box-default">
+			<div class="box-header with-border">
+				<h3 class="box-title">Address Information</h3>
 				<div class="box-tools pull-right">
 					<button type="button" class="btn btn-box-tool" data-widget="collapse">
 						<i class="fa fa-minus"></i>
@@ -94,41 +176,37 @@
 			<div class="box-body">
 				<form id="frmMember" role="form">
 					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-3">
 							<div class="form-group">
 								<label>Province</label>
 								<select name="province" class="form-control">
 				                 </select>
 							</div>
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-3">
 							<div class="form-group">
 								<label>District</label>
 								<select name="district" class="form-control" disabled>
 				                 </select>
 							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-3">
 							<div class="form-group">
 								<label>Sub District</label>
 								<select name="subDistrict" class="form-control" disabled>
 				                 </select>
 							</div>
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-3">
 							<div class="form-group">
 								<label>Post Code</label>
-								<input name="postCode" type="text" class="form-control" placeholder="" disabled>
+								<input name="postCode" type="text" class="form-control" placeholder="" readonly>
 							</div>
 						</div>
 					</div>
 				</form>
 			</div>
 		</div>
-	
-		
 		
 	</section><!-- /.content -->
 	
@@ -140,9 +218,14 @@
 
 </div><!-- ./wrapper -->
 
+<jsp:include page="dealing_modal_search.jsp" />
+
 <script src="${pageContext.request.contextPath}/resources/scripts/Common.js"></script>
 <script>
 var Dealing = function(){
+	
+	var DataTableCustomer = {};
+	var SearchCustomer = {};
 	
 	var selectedProvinceId = null;
 	var selectedDistrictId = null;
@@ -160,7 +243,7 @@ var Dealing = function(){
 			    type : 'POST',
 			    contentType : 'application/json',
 			    headers : {
-	                'X-CSRF-TOKEN' : $("meta[name='_csrf']").attr("content") 
+	                'X-CSRF-TOKEN' : AjaxManager.CsrfToken 
 	            },
 	            data : function (params) {
 	            	params.page = params.page || 0;
@@ -172,6 +255,7 @@ var Dealing = function(){
 		                results : $.map(data.content, function (item) {
 		                    return {
 		                    	id     : item.provinceId,
+		                    	code   : item.provinceCode,
 		                    	text   : item.provinceNameTH,
 		                        textEn : item.provinceNameEN
 		                    }
@@ -188,16 +272,18 @@ var Dealing = function(){
 				  var $template = $('<div></div>');
 				  var $body_line1 = $('<span>' + data.text + '</span>');  
 				  var $body_line2 = $('<small><b>' + data.textEn + '</b></small>');  
+				  var $body_line3 = $('<small><b>code : </b>' + data.code + '</small>');  
 				  
 				  $template.append($body_line1);
 				  $template.append('<br>');
 				  $template.append($body_line2);
+				  $template.append('<br>');
+				  $template.append($body_line3);
 				  
                   return $template;
 			  } 
 		}).on('select2:select', function (e) {
-		    var data = e.params.data;
-		    selectedProvinceId = data.id;
+		    selectedProvinceId = e.params.data.id;
 		    $('select[name="district"]').prop("disabled", false);
 		    $('select[name="district"]').val([]).trigger('change');
 		    $('select[name="subDistrict"]').prop("disabled", true);
@@ -215,7 +301,7 @@ var Dealing = function(){
 			    type : 'POST',
 			    contentType : 'application/json',
 			    headers : {
-	                'X-CSRF-TOKEN' : $("meta[name='_csrf']").attr("content") 
+	                'X-CSRF-TOKEN' : AjaxManager.CsrfToken  
 	            },
 	            data : function (params) {
 	            	params.page = params.page || 0;
@@ -228,6 +314,7 @@ var Dealing = function(){
 		                results : $.map(data.content, function (item) {
 		                    return {
 		                    	id     : item.districtId,
+		                    	code   : item.districtCode,
 		                    	text   : item.districtNameTH,
 		                        textEn : item.districtNameEN
 		                    }
@@ -244,19 +331,21 @@ var Dealing = function(){
 				  var $template = $('<div></div>');
 				  var $body_line1 = $('<span>' + data.text + '</span>');  
 				  var $body_line2 = $('<small><b>' + data.textEn + '</b></small>');  
+				  var $body_line3 = $('<small><b>code : </b>' + data.code + '</small>');  
 				  
 				  $template.append($body_line1);
 				  $template.append('<br>');
 				  $template.append($body_line2);
+				  $template.append('<br>');
+				  $template.append($body_line3);
 				  
                   return $template;
 			  } 
 		}).on('select2:select', function (e) {
-		    var data = e.params.data;
-		    selectedDistrictId = data.id;
+		    selectedDistrictId = e.params.data.id;
 			$('select[name="subDistrict"]').prop("disabled", false);
 			$('select[name="subDistrict"]').val([]).trigger('change');
-			 $('input[name="postCode"]').val('');
+			$('input[name="postCode"]').val('');
 		});
 	}
 	
@@ -269,7 +358,7 @@ var Dealing = function(){
 			    type : 'POST',
 			    contentType : 'application/json',
 			    headers : {
-	                'X-CSRF-TOKEN' : $("meta[name='_csrf']").attr("content") 
+	                'X-CSRF-TOKEN' : AjaxManager.CsrfToken  
 	            },
 	            data : function (params) {
 	            	params.page = params.page || 0;
@@ -281,9 +370,9 @@ var Dealing = function(){
 			    	return {
 		                results : $.map(data.content, function (item) {
 		                    return {
-		                    	id     : item.subDistrictId,
-		                    	code   : item.subDistrictCode,
-		                    	text   : item.subDistrictName,
+		                    	id   : item.subDistrictId,
+		                    	code : item.subDistrictCode,
+		                    	text : item.subDistrictName,
 		                    }
 		                }),
 	                    pagination: {
@@ -292,10 +381,21 @@ var Dealing = function(){
 		            };
 			    }
 			  },
-			  cache : true
+			  cache : true,
+			  templateResult : function (data) {
+				  
+				  var $template = $('<div></div>');
+				  var $body_line1 = $('<span>' + data.text + '</span>');  
+				  var $body_line2 = $('<small><b>code : </b>' + data.code + '</small>');  
+				  
+				  $template.append($body_line1);
+				  $template.append('<br>');
+				  $template.append($body_line2);
+				  
+                  return $template;
+			  } 
 		}).on('select2:select', function (e) {
-		    var data = e.params.data;
-		    AjaxManager.GetData({} ,"api/postcode/" + data.code,
+		    AjaxManager.GetData({} ,"api/postcode/" + e.params.data.code,
 				function(response){
 					if (response) {
 						 $('input[name="postCode"]').val(response.zipCode);
@@ -306,12 +406,139 @@ var Dealing = function(){
 		});
 	}
 	
+	var handleDataTableCustomer = function(){
+		DataTableCustomer = $('#tableCustomer').DataTable({
+			processing   : true,
+			serverSide   : true,
+			responsive   : false,
+			select       : true,
+			searching    : false,
+			scrollX      : true,
+			deferRender  : true,
+			fnDrawCallback : function() {
+	            $('input[type="checkbox"]').bootstrapToggle();
+	        },
+			ajax: {
+				url: 'api/customer/findByCriteria',
+				type: "POST",
+				contentType: 'application/json',
+				headers: {
+	                'X-CSRF-TOKEN' : AjaxManager.CsrfToken 
+	            },
+				data: function (d) {
+					d.search = SearchCustomer;
+					return JSON.stringify(d);
+				}
+			},
+			columns: [
+				{ data: null                  , title : "Order"},
+				{ data: "customerCode"        , title : "Customer Code"},
+				{ data: "customerName"        , title : "Customer Name"},
+				{ data: "customerSurname"     , title : "Customer Surname" },
+				{ data: "customerEmail"       , title : "Customer Email" },
+				{ data: "customerMobile"      , title : "Customer Mobile" }
+			],
+			columnDefs: [
+				{
+					targets   : 0,
+					width     : "10%",
+					orderable : false,
+					render    : function (data, type, row, meta) {
+						return meta.settings._iDisplayStart + meta.row + 1;
+					}
+				}
+			],
+			colReorder   : {
+	            fixedColumnsLeft: 1
+	        },
+			select: {
+		   		style: 'single'
+		    },
+			order: [[1, 'asc']]
+		});
+		
+		$('#tableCustomer tbody').on('dblclick', 'tr', function () {
+	    	var data = DataTableCustomer.row(this).data();
+	    	$('input[name="customerCode"]').val(data.customerCode);
+	    	$('input[name="customerName"]').val(data.customerName);
+	    	$('input[name="customerSurname"]').val(data.customerSurname);
+	    	$('input[name="customerMobile"]').val(data.customerMobile);
+	    	$('input[name="customerEmail"]').val(data.customerEmail);
+	    	$('#modal_search').modal('hide');
+	    });
+	}
+	
+	var handleButtonShowModal = function(){
+		$('#btnTrigerModal').on('click', function(event){
+			$('#modal_search').modal();
+		});
+	}
+	
+	var handleButtonCloseModal = function(){
+		$('#btnClose').on('click', function(event){
+			$('#modal_search').modal('hide');
+		});
+	}
+	
+	var handleModalSearchCustomer = function(){
+		$('#modal_search')
+			.bind('shown.bs.modal', function (event) {
+				DataTableCustomer.ajax.reload();
+			})
+			.bind('hide.bs.modal', function (event) {
+				$('#frmSearchCustomer')[0].reset();
+			});
+	}
+	
+	var handleButtonClearFormCustomer = function(){
+		$('#btnClearFrm').on('click',function(event){
+			$('#frmSearchCustomer')[0].reset();
+		});
+		
+	}
+	
+	var handleButtonSearchCustomer = function(){
+		$('#btnSearchCustomer').on('click',function(event){
+			event.preventDefault();
+			SearchCustomer.customerCode    = $('#frmSearchCustomer input[name="customerCode"]').val();
+			SearchCustomer.customerName    = $('#frmSearchCustomer input[name="customerName"]').val();
+			SearchCustomer.customerSurname = $('#frmSearchCustomer input[name="customerSurname"]').val();
+			SearchCustomer.customerEmail   = $('#frmSearchCustomer input[name="customerEmail"]').val();
+			SearchCustomer.customerMobile  = $('#frmSearchCustomer input[name="customerMobile"]').val();
+			DataTableCustomer.ajax.reload();
+		});
+	}
+	
+	var handleButtonSelectCustomer = function(){
+		$('#btnSelect').on('click',function(event){
+			var indx = DataTableCustomer.cell('.selected', 0).index();
+			if(indx !== undefined){
+				var data = DataTableCustomer.row( indx.row ).data();
+				$('input[name="customerCode"]').val(data.customerCode);
+		    	$('input[name="customerName"]').val(data.customerName);
+		    	$('input[name="customerSurname"]').val(data.customerSurname);
+		    	$('input[name="customerMobile"]').val(data.customerMobile);
+		    	$('input[name="customerEmail"]').val(data.customerEmail);
+		    	$('#modal_search').modal('hide');
+			}else{
+				Swal.Warning('แจ้งเตือน','กรุณากดเลือกข้อมูลก่อน');
+			}
+		});
+	}
+	
 	return {
 		init : function(){
 			handleActiveMenu();
 			handleSelectProvince();
 			handleSelectDistrict();
 			handleSelectSubDistrict();
+			handleDataTableCustomer();
+			handleButtonShowModal();
+			handleButtonCloseModal();
+			handleButtonSearchCustomer();
+			handleButtonClearFormCustomer();
+			handleButtonSelectCustomer();
+			handleModalSearchCustomer();
 		}
 	};
 	

@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ public class DistrictApi {
 	@Autowired
 	private DistrictsDao districtsDao; 
 	
+	@PreAuthorize("hasAnyAuthority('TR005')")
 	@PostMapping(path = "/findByTerm")
 	public Page<Districts> findByTerm(@RequestBody @Valid SearchDistrictDTO search){
 		return districtsDao.findByTerm(search);
