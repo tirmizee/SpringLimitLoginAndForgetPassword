@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fontFamilies>
+    <fontFamily name="Angsana New">
+        <normal><![CDATA[fonts/ANGSA.TTF]]></normal>
+        <bold><![CDATA[fonts/ANGSAB.TTF]]></bold>
+        <italic><![CDATA[fonts/ANGSAI.TTF]]></italic>
+        <boldItalic><![CDATA[fonts/ANGSAZ.TTF]]></boldItalic>
+        <pdfEncoding><![CDATA[Identity-H]]></pdfEncoding>
+        <pdfEmbedded><![CDATA[true]]></pdfEmbedded>
+    </fontFamily>
+    
+    <fontFamily name="Wingdings">
+        <normal><![CDATA[fonts/WINGDING.TTF]]></normal>
+        <pdfEmbedded><![CDATA[true]]></pdfEmbedded>
+        <pdfEncoding><![CDATA[Identity-H]]></pdfEncoding>
+    </fontFamily>
+    
+    <fontFamily name="Helvetica">
+        <normal><![CDATA[fonts/HELVETICA.TTF]]></normal>
+        <pdfEmbedded><![CDATA[true]]></pdfEmbedded>
+        <pdfEncoding><![CDATA[Identity-H]]></pdfEncoding>
+    </fontFamily>
+   
+    <fontFamily name="TH SarabunIT">
+       <normal><![CDATA[fonts/THSarabunIT.ttf]]></normal>
+       <bold><![CDATA[fonts/THSarabunITBold.ttf]]></bold>
+       <italic><![CDATA[fonts/THSarabunITItalic.ttf]]></italic>
+       <boldItalic><![CDATA[fonts/THSarabunITBoldItalic.ttf]]></boldItalic>
+       <pdfEncoding><![CDATA[Identity-H]]></pdfEncoding>
+       <pdfEmbedded><![CDATA[true]]></pdfEmbedded>
+   </fontFamily>
+   
+    <fontFamily name="TahomaTH">
+        <normal><![CDATA[fonts/tahoma.ttf]]></normal>
+        <bold><![CDATA[fonts/tahomabd.ttf]]></bold>
+        <pdfEncoding><![CDATA[Identity-H]]></pdfEncoding>
+        <pdfEmbedded><![CDATA[true]]></pdfEmbedded>
+    </fontFamily>
+
+</fontFamilies>

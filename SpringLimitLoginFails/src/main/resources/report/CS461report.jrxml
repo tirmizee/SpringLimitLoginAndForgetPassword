@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CS461report" pageWidth="595" pageHeight="842" columnWidth="565" leftMargin="15" rightMargin="15" topMargin="15" bottomMargin="15" isFloatColumnFooter="true" uuid="f1ac7892-a4cd-41f6-8cc4-419adff84dfa">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Testgen3"/>
+	<property name="ireport.zoom" value="3.536921536500005"/>
+	<property name="ireport.x" value="1145"/>
+	<property name="ireport.y" value="511"/>
+	<parameter name="LOGO1_PATH" class="java.lang.String"/>
+	<parameter name="REMARK" class="java.lang.String"/>
+	<queryString language="json">
+		<![CDATA[]]>
+	</queryString>
+	<field name="polYear" class="java.lang.String">
+		<fieldDescription><![CDATA[polYear]]></fieldDescription>
+	</field>
+	<field name="premYear" class="java.lang.String">
+		<fieldDescription><![CDATA[premYear]]></fieldDescription>
+	</field>
+	<field name="pbPcnt" class="java.lang.String">
+		<fieldDescription><![CDATA[pbPcnt]]></fieldDescription>
+	</field>
+	<field name="pbAmnt" class="java.lang.String">
+		<fieldDescription><![CDATA[pbAmnt]]></fieldDescription>
+	</field>
+	<field name="sumInsuredPcnt" class="java.lang.String">
+		<fieldDescription><![CDATA[sumInsuredPcnt]]></fieldDescription>
+	</field>
+	<field name="sumInsuredAmnt" class="java.lang.String">
+		<fieldDescription><![CDATA[sumInsuredAmnt]]></fieldDescription>
+	</field>
+	<field name="taxBenef" class="java.lang.String">
+		<fieldDescription><![CDATA[taxBenef]]></fieldDescription>
+	</field>
+	<field name="planName" class="java.lang.String">
+		<fieldDescription><![CDATA[planName]]></fieldDescription>
+	</field>
+	<field name="insureName" class="java.lang.String">
+		<fieldDescription><![CDATA[insureName]]></fieldDescription>
+	</field>
+	<field name="gender" class="java.lang.String">
+		<fieldDescription><![CDATA[gender]]></fieldDescription>
+	</field>
+	<field name="sa" class="java.lang.String">
+		<fieldDescription><![CDATA[sa]]></fieldDescription>
+	</field>
+	<field name="premium" class="java.lang.String">
+		<fieldDescription><![CDATA[premium]]></fieldDescription>
+	</field>
+	<field name="benTax" class="java.lang.String">
+		<fieldDescription><![CDATA[benTax]]></fieldDescription>
+	</field>
+	<field name="age" class="java.lang.String"/>
+	<field name="benefAll" class="java.lang.String"/>
+	<field name="benefAllNet" class="java.lang.String"/>
+	<field name="sumPremYear" class="java.lang.String"/>
+	<field name="sumPBPcnt" class="java.lang.String"/>
+	<field name="sumPBAmnt" class="java.lang.String"/>
+	<field name="sumTaxBenef" class="java.lang.String"/>
+	<field name="dayDOB" class="java.lang.String"/>
+	<field name="monthDOB" class="java.lang.String"/>
+	<field name="yearDOB" class="java.lang.String"/>
+	<field name="dayApp" class="java.lang.String"/>
+	<field name="monthApp" class="java.lang.String"/>
+	<field name="yearApp" class="java.lang.String"/>
+	<field name="csv" class="java.lang.String"/>
+	<field name="deathClaim" class="java.lang.String">
+		<fieldDescription><![CDATA[deathClaim]]></fieldDescription>
+	</field>
+	<field name="taxDeduct" class="java.lang.String">
+		<fieldDescription><![CDATA[taxDeduct]]></fieldDescription>
+	</field>
+	<field name="loopSA" class="java.lang.String">
+		<fieldDescription><![CDATA[loopSA]]></fieldDescription>
+	</field>
+	<field name="loopCV" class="java.lang.String">
+		<fieldDescription><![CDATA[loopCV]]></fieldDescription>
+	</field>
+	<field name="loanAmt" class="java.lang.String">
+		<fieldDescription><![CDATA[loanAmt]]></fieldDescription>
+	</field>
+	<variable name="V_CURRENT_PAGE" class="java.lang.Integer" resetType="Page">
+		<variableExpression><![CDATA[1]]></variableExpression>
+		<initialValueExpression><![CDATA[$V{PAGE_NUMBER}]]></initialValueExpression>
+	</variable>
+	<background>
+		<band height="800">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField evaluationTime="Auto" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="10" y="350" width="545" height="110" forecolor="#FFE0E3" backcolor="#FFFFFF" uuid="e6811bd2-f1dc-43e1-b71b-cb6d468a5a67"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="TahomaTH" size="44" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="TahomaTH" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["water_mark_me"]]></textFieldExpression>
+			</textField>
+		</band>
+	</background>
+	<pageHeader>
+		<band height="140" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="564" height="40" uuid="8e197369-80af-4179-8e4d-41823d444ff1"/>
+				<box topPadding="0" leftPadding="0">
+					<topPen lineWidth="0.5" lineColor="#B7B7B7"/>
+					<leftPen lineWidth="0.5" lineColor="#B7B7B7"/>
+					<bottomPen lineWidth="0.5" lineColor="#B7B7B7"/>
+					<rightPen lineWidth="0.5" lineColor="#B7B7B7"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="TahomaTH" size="5" pdfFontName="ZapfDingbats" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="0" y="40" width="564" height="16" forecolor="#FFFFFF" backcolor="#1691B8" uuid="37ecf5e2-9740-4a50-9266-0e9c8a59756d">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#B7B7B7"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#B7B7B7"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#B7B7B7"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#B7B7B7"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TahomaTH" size="8" isBold="true" pdfFontName="TahomaTH" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ใบเสนอขายแบบประกัน  xoiuu" +  $F{planName}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="430" y="7" width="108" height="26" uuid="b32dc0ac-840b-462b-ac18-1bae0b0483fb">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{LOGO1_PATH}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="8" y="4" width="402" height="32" uuid="e919c77d-b44c-47e1-89f8-fadc18ba7b9c"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="TahomaTH" size="5" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[รับประกันภัย โดยบริษัท เจนเนอราลี่ ประกันชีวิต (ไทยแลนด์) จำกัด (มหาชน)  ชั้น16 ยูนิต 1603-1605 อาคารซีอาร์ซี ทาวเวอร์ ออลซีซั่น เพลส
+87/2 ถนนวิทยุ แขวงลุมพินี เขตปทุมวัน กรุงเทพฯ 10330 โทร. 0-2685-3828  โทรสาร 0-2685-3829
+Generali Life Assurance (Thailand) Plc. 16th Floor, Unit 1603-1605, CRC Tower,
+All Season Place, 87/2 Wireless Road, Lumpini, Phatumwan, Bangkok 10330 Tel. 0-2685-3828  Fax. 0-2685-3829]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="78" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="12">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="210" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<staticText>
+				<reportElement x="10" y="171" width="560" height="10" uuid="fbf0c1d0-db8d-4d6c-94bc-a208fccc279a"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="TahomaTH" size="6" pdfFontName="TahomaTH" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[เอกสารนี้จัดทำขึ้นเพื่อเสริมสร้างความเข้าใจเท่านั้น จึงมิใช่ส่วนหนึ่งของสัญญาประกันภัย หรือเป็นเอกสารผูกพันบริษัท	]]></text>
+			</staticText>
+			<textField evaluationTime="Auto" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="471" y="183" width="90" height="14" forecolor="#000000" backcolor="#FFFFFF" uuid="e01af67a-15ce-44b8-b391-80c99702eb9a"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="TahomaTH" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="TahomaTH" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["หน้า (" + $V{V_CURRENT_PAGE} + "/" + $V{PAGE_NUMBER} + ")"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Auto">
+				<reportElement mode="Transparent" x="114" y="183" width="334" height="14" forecolor="#000000" backcolor="#FFFFFF" uuid="ce215a82-3ab8-4a4c-8f05-21bfbf87bdca">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="TahomaTH" size="6" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="TahomaTH" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date())]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+</jasperReport>
