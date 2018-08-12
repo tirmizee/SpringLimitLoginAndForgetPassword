@@ -10,6 +10,8 @@ public class UserProfile extends UserDetailsImpl {
 	private String lastName;
 	private String roleName;
 	private String accessIp;
+	private String skinClass;
+	private String skinImage;
 	private Long fkMemberImgId;
 	private boolean initialLogin;
 	private Timestamp credentialsExpiredDate;
@@ -21,6 +23,8 @@ public class UserProfile extends UserDetailsImpl {
 		this.roleName = builder.roleName;
 		this.fkMemberImgId = builder.fkMemberImgId;
 		this.accessIp = builder.accessIp;
+		this.skinClass = builder.skinClass;
+		this.skinImage = builder.skinImage;
 		this.initialLogin = builder.initialLogin;
 		this.credentialsExpiredDate = builder.credentialsExpiredDate;
 	}
@@ -67,12 +71,26 @@ public class UserProfile extends UserDetailsImpl {
 	public void setCredentialsExpiredDate(Timestamp credentialsExpiredDate) {
 		this.credentialsExpiredDate = credentialsExpiredDate;
 	}
+	public String getSkinClass() {
+		return skinClass;
+	}
+	public void setSkinClass(String skinClass) {
+		this.skinClass = skinClass;
+	}
+	public String getSkinImage() {
+		return skinImage;
+	}
+	public void setSkinImage(String skinImage) {
+		this.skinImage = skinImage;
+	}
 
 	public static class Builder extends UserDetailsImpl.Builder<Builder>{
 		
 		private String fistName;
 		private String lastName;
 		private String roleName;
+		private String skinClass;
+		private String skinImage;
 		private Long fkMemberImgId;
 		private String accessIp;
 		private boolean initialLogin;
@@ -102,6 +120,16 @@ public class UserProfile extends UserDetailsImpl {
 		
 		public Builder accessIp(String accessIp){
 			this.accessIp = accessIp;
+			return this;
+		}
+		
+		public Builder skinClass(String skinClass){
+			this.skinClass = skinClass;
+			return this;
+		}
+		
+		public Builder skinImage(String skinImage){
+			this.skinImage = skinImage;
 			return this;
 		}
 		

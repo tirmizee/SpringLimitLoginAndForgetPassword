@@ -39,7 +39,7 @@ public class RequestLoggingFilter extends AbstractRequestLoggingFilter {
 
 	@Override
 	protected boolean shouldLog(HttpServletRequest request) {
-		return request.getRequestURL().toString().indexOf("resource") < 0;
+		return false; //request.getRequestURL().toString().indexOf("resource") < 0;
 	}
 	
 }

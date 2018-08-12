@@ -62,6 +62,14 @@ public class EnforceChangePasswordServiceImpl implements EnforceChangePasswordSe
 	}
 	
 	@Override
+	public void updatePasswordExpired(String username) {
+		Member member = memberDao.findOne(username);
+		member.setCredentialsNonExpired(false);
+		member.setUpdateDate(nowTimestamp());
+		memberDao.save(member);
+	}
+	
+	@Override
 	public boolean isPasswordExpired(Timestamp ExpiryDate){
 		return nowTimestamp().after(ExpiryDate);
 	}
@@ -75,12 +83,4 @@ public class EnforceChangePasswordServiceImpl implements EnforceChangePasswordSe
 		return new Timestamp(new Date().getTime());
 	}
 
-	@Override
-	public void updatePasswordExpired(String username) {
-		Member member = memberDao.findOne(username);
-		member.setCredentialsNonExpired(false);
-		member.setUpdateDate(nowTimestamp());
-		memberDao.save(member);
-	}
-	
 }

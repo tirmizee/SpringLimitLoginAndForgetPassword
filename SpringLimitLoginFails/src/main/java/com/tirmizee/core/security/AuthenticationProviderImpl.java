@@ -40,10 +40,9 @@ public class AuthenticationProviderImpl extends DaoAuthenticationProvider {
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		final String username = authentication.getName();
-		UserProfile userProfile;
 		try{
 			Authentication authen = super.authenticate(authentication);
-			userProfile =  (UserProfile) authen.getPrincipal();
+			UserProfile userProfile =  (UserProfile) authen.getPrincipal();
 			if (userProfile.isInitialLogin()) {
 				throw new ICredentialsFirstloginException( username, "Force password change");
 			}

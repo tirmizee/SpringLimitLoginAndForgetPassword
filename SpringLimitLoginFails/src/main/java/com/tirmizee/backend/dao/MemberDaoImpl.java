@@ -22,6 +22,7 @@ import com.tirmizee.core.repository.ForgetPasswordRepository;
 import com.tirmizee.core.repository.MemberImageRepository;
 import com.tirmizee.core.repository.MemberRepositoryImpl;
 import com.tirmizee.core.repository.RoleRepository;
+import com.tirmizee.core.repository.SkinRepository;
 
 @Repository("MemberDao")
 public class MemberDaoImpl extends MemberRepositoryImpl implements MemberDao {
@@ -35,6 +36,8 @@ public class MemberDaoImpl extends MemberRepositoryImpl implements MemberDao {
 			memberAndRole.setEmail(rs.getString(COL_EMAIL));
 			memberAndRole.setFkRoleId(rs.getInt(COL_FKROLEID));
 			memberAndRole.setFkMemberImgId(rs.getLong(COL_FKIMGID));
+			memberAndRole.setSkinClass(rs.getString(SkinRepository.COL_SKINCLASS));
+			memberAndRole.setSkinImage(rs.getString(SkinRepository.COL_SKINIMAGE));
 			memberAndRole.setImgName(rs.getString(MemberImageRepository.COL_IMG_NAME));
 			memberAndRole.setEnabled(rs.getBoolean(COL_ENABLED));
 			memberAndRole.setAccountNonLocked(rs.getBoolean(COL_ACCOUNTNONLOCKED));
@@ -143,7 +146,7 @@ public class MemberDaoImpl extends MemberRepositoryImpl implements MemberDao {
 	}
 
 	@Override
-	public MemberAndRole findMemberAndRoleByUsername(String username) {
+	public MemberAndRole findMemberProfileByUsername(String username) {
 		try {
 			StringBuilder select = new StringBuilder()
 				.append("SELECT * FROM ").append(TABLE_MEMBER)
@@ -151,6 +154,8 @@ public class MemberDaoImpl extends MemberRepositoryImpl implements MemberDao {
 				.append(" ON ").append(FKROLEID).append(" = ").append(RoleRepository.ROLEID)
 				.append(" JOIN ").append(MemberImageRepository.TABLE_MEMBERIMAGE)
 				.append(" ON ").append(FKIMGID).append(" = ").append(MemberImageRepository.ID)
+				.append(" JOIN ").append(SkinRepository.TABLE_SKIN)
+				.append(" ON ").append(COL_FKSKINID).append(" = ").append(SkinRepository.SKINID)
 				.append(" WHERE ").append(USERNAME).append(" = ? ");
 			return getJdbcOps().queryForObject(select.toString(), new Object[]{username}, MEMBER_AND_ROLE_MAPPER);
 		} catch (EmptyResultDataAccessException e) {

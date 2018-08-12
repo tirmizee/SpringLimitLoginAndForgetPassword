@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions"   prefix = "fn" %>
 <%@ taglib uri = "http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<security:authentication var="profile" property="principal" />
 <!DOCTYPE>
 <html>
 <head>
@@ -16,8 +18,7 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/ionicons/css/ionicons.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/admin-lte2/css/AdminLTE.min.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/admin-lte2/css/skins/skin-green.min.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/admin-lte2/css/skins/skin-yellow.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/admin-lte2/css/skins/_all-skins.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/validate-form-master/css/formValidation.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/datatables/css/jquery.dataTables.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/datatables/css/buttons.dataTables.min.css">
@@ -62,7 +63,7 @@
   
 <title>SpringLimitLoginFails</title>
 </head>
-<body class="hold-transition skin-green sidebar-mini">
+<body class="hold-transition ${profile.skinClass} sidebar-mini">
   <div class="wrapper">
 
     <jsp:include page="../../template/header.jsp" />
@@ -105,7 +106,13 @@
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane active" id="activity">
-							
+							The European languages are members of the same family. Their separate existence is a myth.
+							For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ
+							in their grammar, their pronunciation and their most common words. Everyone realizes why a
+							new common language would be desirable: one could refuse to pay expensive translators. To
+							achieve this, it would be necessary to have uniform grammar, pronunciation and more common
+							words. If several languages coalesce, the grammar of the resulting language is more simple
+							and regular than that of the individual languages.
 						</div>
 						<div class="tab-pane" id="edit_profile">
 							<form  id="frmChangeProfile" action="${pageContext.request.contextPath}/api/image/changeProfile" method="post" class="form-horizontal" enctype="multipart/form-data">

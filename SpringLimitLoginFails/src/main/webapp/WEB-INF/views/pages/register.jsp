@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8;" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!DOCTYPE>
 <html>
 <head>
@@ -65,7 +66,7 @@
 	background-color: #f7f7f7;
 }
 </style>
-<title>SpringLimitLoginFails</title>
+<title><spring:message code="app.title"/></title>
 </head>
 <body class="bg">
 	<div class="container" >

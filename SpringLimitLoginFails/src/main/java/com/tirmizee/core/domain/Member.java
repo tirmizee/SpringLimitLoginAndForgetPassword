@@ -16,6 +16,7 @@ public class Member implements Persistable<String>{
 	private String password;
 	private Integer fkRoleId;
 	private Long fkMemberImgId;
+	private Integer fkSkinId;
 	private String email;
 	private Boolean enabled;
 	private Boolean accountNonLocked;
@@ -146,6 +147,15 @@ public class Member implements Persistable<String>{
 
 	public void setCredentialsExpiredDate(Timestamp credentialsExpiredDate) {
 		this.credentialsExpiredDate = credentialsExpiredDate;
+	}
+	
+
+	public Integer getFkSkinId() {
+		return fkSkinId;
+	}
+
+	public void setFkSkinId(Integer fkSkinId) {
+		this.fkSkinId = fkSkinId;
 	}
 
 	public Member withPersisted(boolean persisted) {

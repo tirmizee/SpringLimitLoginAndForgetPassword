@@ -136,7 +136,7 @@ public class MemberServiceImpl implements MemberService {
 		if (image == null) {
 			throw new UrlNotFoundException();
 		}
-		return new FileSystemResource( StorageImageServiceImpl.UPLOAD_PATH + image.getImgOriginalName());
+		return new FileSystemResource( StorageProfileImageServiceImpl.UPLOAD_PATH + image.getImgOriginalName());
 	}
 
 }

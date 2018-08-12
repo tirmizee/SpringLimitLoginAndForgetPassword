@@ -27,7 +27,7 @@ public class AppConfig {
 	@Bean
 	public MessageSourceUtils messageSource() {
 		MessageSourceUtilsImpl messageSource = new MessageSourceUtilsImpl();
-        messageSource.setBasename("classpath:messages");
+        messageSource.setBasename("classpath:i18n/messages");
         messageSource.setUseCodeAsDefaultMessage(true);
         messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
@@ -35,13 +35,15 @@ public class AppConfig {
 	
 	@Bean
 	public JavaMailSenderImpl javaMailSenderImpl(){
+		
+//		Properties javaMailProperties = new Properties();
+//		javaMailProperties.put("mail.smtp.starttls.enable", "true");
+		
 		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 		mailSender.setHost(env.getProperty("mail.host"));
 	    mailSender.setPort(Integer.parseInt(env.getProperty("mail.port")));
         return mailSender;
 	}
-	
-	
 	
 	@Bean
 	public freemarker.template.Configuration freemarker(){

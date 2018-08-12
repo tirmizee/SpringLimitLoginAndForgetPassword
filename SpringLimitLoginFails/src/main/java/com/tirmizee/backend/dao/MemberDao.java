@@ -16,7 +16,7 @@ public interface MemberDao extends MemberRepository{
 	
 	MemberProfile findProfileByUsername(String username);
 	
-	MemberAndRole findMemberAndRoleByUsername(String username);
+	MemberAndRole findMemberProfileByUsername(String username);
 	
 	Member findByUsername(String username);
 	

@@ -1,12 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<security:authentication var="profile" property="principal" />
 <!DOCTYPE>
 <html>
 <head>
+  <meta name="rootUrl" content="${pageContext.request.contextPath}"/>
   <meta name="_csrf" content="${_csrf.token}"/>
   <meta name="_csrf_header" content="${_csrf.headerName}"/>
-  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="shortcut icon" href="favicon.ico">
@@ -17,7 +20,7 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/select2/css/select2.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/admin-lte2/css/AdminLTE.min.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/admin-lte2/css/skins/skin-green.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/admin-lte2/css/skins/_all-skins.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/validate-form-master/css/formValidation.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/datatables/css/jquery.dataTables.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/datatables/css/buttons.dataTables.min.css">
@@ -26,6 +29,8 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/datatables/css/select.dataTables.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/bootstrap-toggle/css/bootstrap-toggle.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/sweetalert2/css/sweetalert2.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/waitme/css/waitMe.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/viewer/css/viewer.css">
  
   <script src="${pageContext.request.contextPath}/resources/libs/bootstrap/js/jquery-3.2.1.min.js" ></script>
   <script src="${pageContext.request.contextPath}/resources/libs/bootstrap/js/bootstrap.min.js" ></script>
@@ -42,35 +47,54 @@
   <script src="${pageContext.request.contextPath}/resources/libs/datatables/js/dataTables.select.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/libs/bootstrap-toggle/js/bootstrap-toggle.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/libs/sweetalert2/js/sweetalert2.all.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/libs/waitme/js/waitMe.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/libs/viewer/js/viewer.js"></script>
   
   <style>
+  
      .modal-lg{
      	width:90%;
      	margin: 3% auto;
      }
+     
      .modal-header {
      	background-color: #ffc107;
      }
+     
      .modal-title{
      	font-size: 20px;
      	color: #3a3a3a;
      }
+     
      .toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px}
+  	 
   	 .toggle.ios .toggle-handle { border-radius: 20px; }
+  	 
   	 .input-group-disabled{
      	background-color: #eeeeee !important;
      }
+     
      .color-white{
      	color:#ffffff !important;
      }
+     
      .bg-color-info{
      	background-color: #00c0ef;
      }
+     
+     .bg-color-primary{
+     	background-color: 337ab7;
+     }
+     
+     .profile-user-img {
+     	width: 150px !important;
+     }
+     
   </style>
   
-  <title>SpringLimitLoginFails</title>
+  <title><spring:message code="app.title"/></title>
 </head>
-<body class="hold-transition skin-green sidebar-mini">
+<body class="hold-transition ${profile.skinClass} sidebar-mini">
   <div class="wrapper">
 
     <jsp:include page="../../template/header.jsp" />
@@ -95,7 +119,7 @@
 	
 		<div class="box box-default">
 			<div class="box-header with-border">
-				<h3 class="box-title">Personal Information</h3>
+				<h3 class="box-title">Information</h3>
 				<div class="box-tools pull-right">
 					<a type="button" class="btn btn-box-tool" data-widget="collapse">
 						<i class="fa fa-minus"></i>
@@ -104,11 +128,11 @@
 			</div><!-- /.box-header -->
 	
 			<div class="box-body">
-				<form id="frmCustomer">
+				<form id="frmInfo">
 					<div class="row">
 						<div class="col-md-3">
 							<div class="form-group">
-								<label>Code</label>
+								<label>Customer Code</label>
 								<div class="input-group">
 									<span class="input-group-addon input-group-disabled"><i class="fa fa-user"></i></span>
 									<input name="customerCode" type="text" class="form-control" placeholder="" readonly>
@@ -122,7 +146,7 @@
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>First Name</label>
+								<label>Customer Name</label>
 								<div class="input-group">
 									<span class="input-group-addon input-group-disabled"><i class="fa fa-user"></i></span>
 									<input name="customerName" type="text" class="form-control" placeholder="" readonly>
@@ -131,7 +155,7 @@
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>Last Name</label>
+								<label>Customer Surname</label>
 								<div class="input-group">
 									<span class="input-group-addon input-group-disabled"><i class="fa fa-user"></i></span>
 									<input name="customerSurname" type="text" class="form-control" placeholder="" readonly>
@@ -142,7 +166,7 @@
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>Mobile</label>
+								<label>Customer Mobile</label>
 								<div class="input-group">
 									<span class="input-group-addon input-group-disabled"><i class="fa fa-phone"></i></span>
 									<input name="customerMobile" type="text" class="form-control" placeholder="" readonly>
@@ -151,7 +175,7 @@
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>Email</label>
+								<label>Customer Email</label>
 								<div class="input-group">
 									<span class="input-group-addon input-group-disabled"><i class="fa fa-envelope"></i></span>
 									<input name="customerEmail" type="text" class="form-control" placeholder="" readonly>
@@ -159,6 +183,40 @@
 							</div>
 						</div>
 					</div>
+					
+					<div class="row">
+						<div class="col-md-3">
+							<div class="form-group">
+								<label>Product Code</label>
+								<div class="input-group">
+									<span class="input-group-addon input-group-disabled"><i class="fa fa-user"></i></span>
+									<input name="productCode" type="text" class="form-control" placeholder="" readonly>
+									<span class="input-group-btn">
+				                    	<button id="btnTrigerModalProduct" type="button" class="btn btn-primary btn-flat"><b>Search</b></button>
+				                    </span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label>Product Name</label>
+								<div class="input-group">
+									<span class="input-group-addon input-group-disabled"><i class="fa fa-user"></i></span>
+									<input name="productName" type="text" class="form-control" placeholder="" readonly>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>Product Price</label>
+								<div class="input-group">
+									<span class="input-group-addon input-group-disabled"><i class="fa fa-user"></i></span>
+									<input name="productPrice" type="text" class="form-control" placeholder="" readonly>
+								</div>
+							</div>
+						</div>
+					</div>
+					
 				</form>
 			</div>
 		</div>
@@ -174,7 +232,7 @@
 			</div><!-- /.box-header -->
 	
 			<div class="box-body">
-				<form id="frmMember" role="form">
+				<form id="frmAddress" role="form">
 					<div class="row">
 						<div class="col-md-3">
 							<div class="form-group">
@@ -206,7 +264,14 @@
 					</div>
 				</form>
 			</div>
+			<div class="box-footer">
+	        	<div class="row text-center">
+					<button id="btnClearAll" type="button" class="btn btn-default  btn-flat">Clear</button>
+					<button id="btnSave" type="submit" class="btn btn-success  btn-flat">Search</button>
+				</div>
+	        </div>
 		</div>
+		
 		
 	</section><!-- /.content -->
 	
@@ -218,14 +283,18 @@
 
 </div><!-- ./wrapper -->
 
-<jsp:include page="dealing_modal_search.jsp" />
+<jsp:include page="dealing_modal_customer.jsp" />
+<jsp:include page="dealing_modal_product.jsp" />
 
 <script src="${pageContext.request.contextPath}/resources/scripts/Common.js"></script>
 <script>
 var Dealing = function(){
 	
+	var DataTableProduct = {};
 	var DataTableCustomer = {};
+	
 	var SearchCustomer = {};
+	var SearchProduct = {};
 	
 	var selectedProvinceId = null;
 	var selectedDistrictId = null;
@@ -347,7 +416,7 @@ var Dealing = function(){
 			$('select[name="subDistrict"]').val([]).trigger('change');
 			$('input[name="postCode"]').val('');
 		});
-	}
+	} 
 	
 	var handleSelectSubDistrict = function(){
 		$('select[name="subDistrict"]').select2({
@@ -415,9 +484,6 @@ var Dealing = function(){
 			searching    : false,
 			scrollX      : true,
 			deferRender  : true,
-			fnDrawCallback : function() {
-	            $('input[type="checkbox"]').bootstrapToggle();
-	        },
 			ajax: {
 				url: 'api/customer/findByCriteria',
 				type: "POST",
@@ -455,9 +521,7 @@ var Dealing = function(){
 		   		style: 'single'
 		    },
 			order: [[1, 'asc']]
-		});
-		
-		$('#tableCustomer tbody').on('dblclick', 'tr', function () {
+		}).on('dblclick', 'tbody tr', function () {
 	    	var data = DataTableCustomer.row(this).data();
 	    	$('input[name="customerCode"]').val(data.customerCode);
 	    	$('input[name="customerName"]').val(data.customerName);
@@ -468,13 +532,114 @@ var Dealing = function(){
 	    });
 	}
 	
-	var handleButtonShowModal = function(){
+	var handleDataTableProduct = function(){
+		DataTableProduct = $('#tableProduct').DataTable({
+			processing   : true,
+			serverSide   : true,
+			responsive   : false,
+			select       : true,
+			searching    : false,
+			scrollX      : true,
+			autoWidth    : false,
+			ajax: {
+				url: 'api/product/findByCriteria',
+				type: "POST",
+				contentType: 'application/json',
+				headers: {
+	                'X-CSRF-TOKEN' : AjaxManager.CsrfToken 
+	            },
+				data: function (d) {
+					d.search = SearchProduct;
+					return JSON.stringify(d);
+				}
+			},
+			columns: [
+				{ data: null                 , title : "Oder"},
+				{ data: null                 , title : "Product"},
+				{ data: "productCode"        , title : "Product Code"},
+				{ data: "productName"        , title : "Product Name"},
+				{ data: "productDesc"        , title : "Product Desciption"},
+				{ data: "productImage"       , title : ""},
+				{ data: "productPrice"       , title : ""}
+			],
+			columnDefs: [
+				{
+					targets   : 0,
+					width     : "10%",
+					className : "text-center",
+					orderable : false,
+					visible   : false,
+					render    : function (data, type, row, meta) {
+						return meta.settings._iDisplayStart + meta.row + 1;
+					}
+				},
+				{
+					targets   : 1,
+					orderable : false,
+					className : "text-center",
+					width     : "20%",
+					render    : function (data, type, row, meta) {
+						return '<img id="imgProduct_' + data.productCode + '" class="profile-user-img img-responsive"  src="' + AjaxManager.RootUrl + '/file/resource/img/product/' + row.productImage + '">';
+					}
+				},
+				{
+					targets   : 2,
+					className : "text-center",
+					width     : "15%"
+				},
+				{
+					targets   : 3,
+					width     : "20%"
+				},
+				{
+					targets   : 4,
+					width     : "45%",
+					render    : function (data, type, row, meta) {
+						var template = '',
+						    body_1 = '<span>code  : <b style="color:red">' + row.productCode + '</b></span>',
+						    body_2 = '<span>name  : <b>' + row.productName + '</b></span>',
+						    body_3 = '<span>price : <b style="color:green">' + row.productPrice + '</b></span>';
+						template += body_1 + '<br>';
+						template += body_2 + '<br>';
+						template += body_3;
+						return template;
+					}
+				},
+				{
+					targets   : 5,
+					visible   : false
+				},
+				{
+					targets   : 6,
+					visible   : false
+				}
+			],
+			select: {
+		   		style: 'single'
+		    },
+			order: [[0, 'asc']]
+		}).on('dblclick', 'tbody tr', function (event) {
+	    	var data = DataTableProduct.row(this).data();
+	    	$('input[name="productCode"]').val(data.productCode);
+	    	$('input[name="productName"]').val(data.productName);
+	    	$('input[name="productPrice"]').val(data.productPrice);
+	    	$('#modal_search_product').modal('hide');
+	    });
+	}
+	
+	var handleButtonShowModalCustomer = function(){
 		$('#btnTrigerModal').on('click', function(event){
 			$('#modal_search').modal();
 		});
 	}
 	
-	var handleButtonCloseModal = function(){
+	var handleButtonShowModalProduct = function(){
+		$('#btnTrigerModalProduct').on('click', function(event){
+			$('#modal_search_product').modal();
+		});
+	}
+	
+	var handleButtonCloseModalCustomer = function(){
 		$('#btnClose').on('click', function(event){
 			$('#modal_search').modal('hide');
 		});
@@ -483,10 +648,20 @@ var Dealing = function(){
 	var handleModalSearchCustomer = function(){
 		$('#modal_search')
 			.bind('shown.bs.modal', function (event) {
-				DataTableCustomer.ajax.reload();
+				$('#btnSearchCustomer').trigger('click');
 			})
 			.bind('hide.bs.modal', function (event) {
 				$('#frmSearchCustomer')[0].reset();
+			});
+	}
+	
+	var handleModalSearchProduct = function(){
+		$('#modal_search_product')
+			.bind('shown.bs.modal', function (event) {
+				$('#btnSearchProduct').trigger('click');
+			})
+			.bind('hide.bs.modal', function (event) {
+				$('#frmSearchProduct')[0].reset();
 			});
 	}
 	
@@ -494,7 +669,24 @@ var Dealing = function(){
 		$('#btnClearFrm').on('click',function(event){
 			$('#frmSearchCustomer')[0].reset();
 		});
-		
+	}
+	
+	var handleButtonClearFormProduct = function(){
+		$('#btnClearProduct').on('click',function(event){
+			$('#frmSearchProduct')[0].reset();
+		});
+	}
+	
+	var handleButtonClearAll = function(){
+		$('#btnClearAll').on('click',function(event){
+			$('#frmInfo')[0].reset();
+			$('#frmAddress')[0].reset();
+			$('#frmAddress select[name="province"]').val([]).trigger('change');
+			$('#frmAddress select[name="district"]').val([]).trigger('change');
+			$('#frmAddress select[name="subDistrict"]').val([]).trigger('change');
+			$('#frmAddress select[name="district"]').prop("disabled", true);
+			$('#frmAddress select[name="subDistrict"]').prop("disabled", true);
+		});
 	}
 	
 	var handleButtonSearchCustomer = function(){
@@ -506,6 +698,17 @@ var Dealing = function(){
 			SearchCustomer.customerEmail   = $('#frmSearchCustomer input[name="customerEmail"]').val();
 			SearchCustomer.customerMobile  = $('#frmSearchCustomer input[name="customerMobile"]').val();
 			DataTableCustomer.ajax.reload();
+		});
+	}
+	
+	var handleButtonSearchProduct = function(){
+		$('#btnSearchProduct').on('click',function(event){
+			event.preventDefault();
+			SearchProduct.productCode   = $('#frmSearchProduct input[name="productCode"]').val();
+			SearchProduct.productName   = $('#frmSearchProduct input[name="productName"]').val();
+			SearchProduct.productPrice  = $('#frmSearchProduct select[name="productPrice"]').val();
+			console.log(JSON.stringify(SearchProduct));
+			DataTableProduct.ajax.reload();
 		});
 	}
 	
@@ -526,6 +729,22 @@ var Dealing = function(){
 		});
 	}
 	
+	var handleButtonSelectProduct = function(){
+		$('#btnSelectProduct').on('click',function(event){
+			var indx = DataTableProduct.cell('.selected', 0).index();
+			if(indx !== undefined){
+				var data = DataTableProduct.row( indx.row ).data();
+				$('input[name="productCode"]').val(data.productCode);
+		    	$('input[name="productName"]').val(data.productName);
+		    	$('input[name="productPrice"]').val(data.productPrice);
+		    	$('#modal_search_product').modal('hide');
+		    	
+			}else{
+				Swal.Warning('แจ้งเตือน','กรุณากดเลือกข้อมูลก่อน');
+			}
+		});
+	}
+	
 	return {
 		init : function(){
 			handleActiveMenu();
@@ -533,12 +752,19 @@ var Dealing = function(){
 			handleSelectDistrict();
 			handleSelectSubDistrict();
 			handleDataTableCustomer();
-			handleButtonShowModal();
-			handleButtonCloseModal();
+			handleDataTableProduct();
+			handleButtonShowModalCustomer();
+			handleButtonShowModalProduct();
+			handleButtonCloseModalCustomer();
 			handleButtonSearchCustomer();
+			handleButtonSearchProduct();
 			handleButtonClearFormCustomer();
+			handleButtonClearFormProduct();
+			handleButtonClearAll();
 			handleButtonSelectCustomer();
+			handleButtonSelectProduct();
 			handleModalSearchCustomer();
+			handleModalSearchProduct();
 		}
 	};
 	

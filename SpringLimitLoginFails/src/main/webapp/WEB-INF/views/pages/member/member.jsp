@@ -1,7 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<security:authentication var="profile" property="principal" />
 <!DOCTYPE>
 <html>
 <head>
@@ -18,7 +20,7 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/select2/css/select2.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/admin-lte2/css/AdminLTE.min.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/admin-lte2/css/skins/skin-green.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/admin-lte2/css/skins/_all-skins.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/validate-form-master/css/formValidation.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/datatables/css/jquery.dataTables.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/datatables/css/buttons.dataTables.min.css">
@@ -41,7 +43,7 @@
   <script src="${pageContext.request.contextPath}/resources/libs/datatables/js/dataTables.responsive.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/libs/bootstrap-toggle/js/bootstrap-toggle.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/libs/sweetalert2/js/sweetalert2.all.js"></script>
-  
+  <script src="${pageContext.request.contextPath}/resources/libs/sweetalert2/js/promise.min.js"></script>
   
   <style>
      .modal-lg{
@@ -70,17 +72,21 @@
      .profile-user-img {
      	width: 200px !important;
      }
+     .profile-user-img-origin {
+     	width: 50px !important;
+     }
      .toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px}
   	 .toggle.ios .toggle-handle { border-radius: 20px; }
   </style>
   
-  <title>SpringLimitLoginFails</title>
+  <title><spring:message code="app.title"/></title>
 </head>
-<body class="hold-transition skin-green sidebar-mini">
+<body class="hold-transition ${profile.skinClass} sidebar-mini">
   <div class="wrapper">
 
     <jsp:include page="../../template/header.jsp" />
     <jsp:include page="../../template/menu_sidebar.jsp" />
+    
 	<input type="hidden" name="rootUrl" value="${pageContext.request.contextPath}" />		
 
     <div class="content-wrapper">
@@ -182,8 +188,8 @@
 						</div>
 					</div>
 					<div class="row text-center">
-						<button id="btnClear" type="button" class="btn btn-default">Clear</button>
-						<button id="btnSearch" type="button" class="btn btn-warning">Search</button>
+						<button id="btnClear" type="button" class="btn btn-default btn-flat">Clear</button>
+						<button id="btnSearch" type="button" class="btn btn-primary btn-flat">Search</button>
 					</div>
 				</form>
 			</div>
@@ -453,6 +459,7 @@ var Member = function(){
 			columns: [
 				{ data: null                     , title : "Action" },
 				{ data: null                 	 , title : "Order" },
+				{ data: null                 	 , title : "Profile" },
 				{ data: "username"             	 , title : "Username"},
 				{ data: "roleName"            	 , title : "Role Name" },
 				{ data: "email"              	 , title : "Email" },
@@ -481,11 +488,20 @@ var Member = function(){
 					}
 				},
 				{
-					targets   : 5,
-					className : "text-center"
+					targets   : 2,
+					orderable : false,
+					className : "text-center",
+					width     : "20%",
+					render    : function (data, type, row, meta) {
+						return '<img class="profile-user-img-origin img-responsive img-circle"  src="api/member/getImageProfile/' + row.username + '">';
+					}
 				},
 				{
 					targets   : 6,
+					className : "text-center"
+				},
+				{
+					targets   : 7,
 					orderable : false,
 					className : "text-center",
 					render    : function (data, type, row, meta) {
@@ -494,7 +510,7 @@ var Member = function(){
 					}
 				},
 				{
-					targets   : 7,
+					targets   : 8,
 					orderable : false,
 					className : "text-center",
 					render    : function (data, type, row, meta) {
@@ -503,7 +519,7 @@ var Member = function(){
 					}
 				},
 				{
-					targets   : 8,
+					targets   : 9,
 					orderable : false,
 					className : "text-center",
 					render    : function (data, type, row, meta) {
@@ -512,7 +528,7 @@ var Member = function(){
 					}
 				},
 				{
-					targets   : 9,
+					targets   : 10,
 					orderable : false,
 					className : "text-center",
 					render    : function (data, type, row, meta) {
@@ -525,13 +541,11 @@ var Member = function(){
 		});
 	}
 	
-	
-	
 	var handleButtonSaveMember = function(){
 		$('#btnSaveMember').on('click',function(){
 			var option = alertOption();
 			option.text = 'update member.';
-			swal(option).then((result) => {
+			swal(option).then(function(result){
 				if (result.value) {
 					var params = {};
 					params.username               = $('#frmEditMember input[name="username"]').val();
@@ -579,7 +593,7 @@ var Member = function(){
 			var data = DataTable.row($(this).parents('tr')).data();
 			var option = alertOption();
 			option.text = 'delete member.';
-			swal(option).then((result) => {
+			swal(option).then(function(result){
 				if (result.value) {
 					_callApiDeleteMember(data.username);
 			  	} 
@@ -597,7 +611,6 @@ var Member = function(){
 	
 	var handleToggleUpdateEnabled = function(){
 		$(document).on('change', '#tableMember input[name="enabled"]', function (event) {
-			
 			event.preventDefault();
 			
 			var data = DataTable.row($(this).parents('tr')).data();
@@ -606,7 +619,7 @@ var Member = function(){
 			
 			var option = alertOption();
 			option.text = 'update status account enabled.';
-			swal(option).then((result) => {
+			swal(option).then(function(result){
 				if (result.value) {
 					_callApiUpdateEnabled(rowSelected);
 			  	} else {
@@ -627,7 +640,7 @@ var Member = function(){
 			rowSelected = data;
 			
 			option.text = 'update status account non locked.';
-			swal(option).then((result) => {
+			swal(option).then( function(result) {
 				if (result.value) {
 					_callApiUpdateAccountNonLocked(rowSelected);
 			  	} else {
@@ -648,7 +661,7 @@ var Member = function(){
 			rowSelected = data;
 			
 			option.text = 'update status account non expired.';
-			swal(option).then((result) => {
+			swal(option).then( function(result) {
 				if (result.value) {
 					_callApiUpdateAccountNonExpired(rowSelected);
 			  	} else {
@@ -669,7 +682,7 @@ var Member = function(){
 			rowSelected = data;
 			
 			option.text = 'update status credentials non expired.';
-			swal(option).then((result) => {
+			swal(option).then( function(result)  {
 				if (result.value) {
 					_callApiUpdateCredentialsNonExpired(rowSelected);
 			  	} else {
@@ -677,7 +690,7 @@ var Member = function(){
 			  	}
 			});
 		
-		});
+  		});
 	}
 	
 	var handleModalEditMember = function(){

@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<security:authentication var="profile" property="principal" />
 <!DOCTYPE>
 <html>
 <head>
@@ -13,8 +16,9 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/ionicons/css/ionicons.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/admin-lte2/css/AdminLTE.min.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/admin-lte2/css/skins/skin-green.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/admin-lte2/css/skins/_all-skins.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/validate-form-master/css/formValidation.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/libs/viewer/css/viewer.css">
 
   <script src="${pageContext.request.contextPath}/resources/libs/bootstrap/js/jquery-3.2.1.min.js" ></script>
   <script src="${pageContext.request.contextPath}/resources/libs/bootstrap/js/bootstrap.min.js" ></script>
@@ -22,6 +26,7 @@
   <script src="${pageContext.request.contextPath}/resources/libs/validate-form-master/js/formValidation.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/libs/validate-form-master/js/formValidation.popular.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/libs/validate-form-master/js/framework/bootstrap.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/libs/viewer/js/viewer.js"></script>
   
   <style >
 	/* .main-sidebar { background-color: #333 !important }
@@ -30,9 +35,9 @@
 	    background: #3d8420 !important
 	} */
   </style>
-  <title>SpringLimitLoginFails</title>
+  <title><spring:message code="app.title"/></title>
 </head>
-<body class="hold-transition skin-green sidebar-mini">
+<body class="hold-transition ${profile.skinClass} sidebar-mini">
   <div class="wrapper">
 
     <jsp:include page="../../template/header.jsp" />
@@ -118,6 +123,7 @@
         </div>
         <!-- ./col -->
       </div>
+      <img id="imgProfile" class="profile-user-img img-responsive img-circle" src="${pageContext.request.contextPath}/file/resource/img/profile" alt="Picture">
       </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
 
@@ -136,9 +142,19 @@ var SpringAdminIdex = function(){
 		 $('ul.sidebar-menu > li.menu-index').addClass('active');
 	}
 	
+	var handleViewer = function(){
+		var viewer = new Viewer(document.getElementById('imgProfile'));
+		$("#imgProfile").hover(function() {
+		    $(this).css('cursor','zoom-in');
+		}, function() {
+		    $(this).css('cursor','auto');
+		});
+	}
+	
 	return {
 		init : function() {
 			handleActiveMenu();
+			handleViewer();
 		}
 	}
 	

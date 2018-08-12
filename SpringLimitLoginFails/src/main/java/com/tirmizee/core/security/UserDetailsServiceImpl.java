@@ -16,7 +16,7 @@ import com.tirmizee.backend.dao.PermissionDao;
 import com.tirmizee.core.domain.MemberAndRole;
 import com.tirmizee.core.domain.Permission;
 
-public class UserDetailsServiceImpl implements UserDetailsService{
+public class UserDetailsServiceImpl implements UserDetailsService {
 	
 	private MemberDao memberDao;
 	private PermissionDao permissionDao;
@@ -29,18 +29,20 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
 		
-		final MemberAndRole member  = memberDao.findMemberAndRoleByUsername(username);
+		final MemberAndRole member  = memberDao.findMemberProfileByUsername(username);
 		if (member == null ) {
 			throw new UsernameNotFoundException(username);
 		}
-		
+
 		List<Permission> permissions = permissionDao.findByUsername(username);
-		
+
 		return new UserProfile.Builder()
 				.username(username)
 				.password(member.getPassword())
 				.roleName(member.getRoleName())
 				.fkMemberImgId(member.getFkMemberImgId())
+				.skinClass(member.getSkinClass())
+				.skinImage(member.getSkinImage())
 				.authorities(grantAuthorities(permissions))
 				.enabled(member.getEnabled())
 				.accountNonExpired(member.getAccountNonExpired())

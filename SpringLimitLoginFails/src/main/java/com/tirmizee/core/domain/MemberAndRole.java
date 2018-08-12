@@ -11,6 +11,8 @@ public class MemberAndRole extends Member implements Serializable {
 	private String roleName;
 	private String roleDesc;
 	private String imgName;
+	private String skinClass;
+	private String skinImage;
 	private Timestamp createDate;
 	private Timestamp updateDate;
 	
@@ -32,11 +34,23 @@ public class MemberAndRole extends Member implements Serializable {
 	public void setRoleDesc(String roleDesc) {
 		this.roleDesc = roleDesc;
 	}
+	public String getSkinClass() {
+		return skinClass;
+	}
+	public void setSkinClass(String skinClass) {
+		this.skinClass = skinClass;
+	}
 	public String getImgName() {
 		return imgName;
 	}
 	public void setImgName(String imgName) {
 		this.imgName = imgName;
+	}
+	public String getSkinImage() {
+		return skinImage;
+	}
+	public void setSkinImage(String skinImage) {
+		this.skinImage = skinImage;
 	}
 	public Timestamp getCreateDate() {
 		return createDate;

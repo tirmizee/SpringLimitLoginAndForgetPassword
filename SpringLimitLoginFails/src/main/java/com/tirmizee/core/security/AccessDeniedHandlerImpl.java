@@ -22,7 +22,6 @@ public class AccessDeniedHandlerImpl implements AccessDeniedHandler{
 	@Override
 	public void handle(HttpServletRequest request, HttpServletResponse response,
 			AccessDeniedException accessDeniedException) throws IOException, ServletException {
-		accessDeniedException.printStackTrace();
 		response.sendRedirect(request.getContextPath() + URL_ACCESSDENIED);
 	}
 

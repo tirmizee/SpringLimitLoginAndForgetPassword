@@ -11,9 +11,9 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service("StorageImageService")
-public class StorageImageServiceImpl implements StorageService{
+public class StorageProfileImageServiceImpl implements StorageService{
 	
-	public static final String UPLOAD_PATH = "D:\\ProjectSpring\\images\\";
+	public static final String UPLOAD_PATH = "D:\\ProjectSpring\\images\\profile\\";
 	
 	@Override
 	public void store(MultipartFile fileToStore) {

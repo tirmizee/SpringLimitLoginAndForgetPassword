@@ -1,2 +1,6 @@
 eclipse.preferences.version=1
+encoding//src/main/resources/i18n/messages_th.properties=UTF-8
+encoding//src/main/resources/report/CS461report.jrxml=UTF-8
+encoding//src/main/resources/report/Coffee.jrxml=UTF-8
 encoding//src/main/resources/report/payment.jrxml=UTF-8
+encoding//src/main/webapp/WEB-INF/views/pages/dealing/dealing_modal_product.jsp=UTF-8

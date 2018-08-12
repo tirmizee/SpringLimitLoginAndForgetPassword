@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tirmizee.backend.dao.RoleDao;
+import com.tirmizee.core.annotaion.CurrentUser;
+import com.tirmizee.core.security.UserProfile;
 
 @Controller
 public class WebController {
@@ -24,7 +26,7 @@ public class WebController {
 	
 	@PreAuthorize("hasAnyAuthority('TR001')")
 	@GetMapping(path = "/main")
-	public ModelAndView main(){
+	public ModelAndView main(@CurrentUser UserProfile profile){
 		return new ModelAndView("pages/main/main");
 	}
 	
@@ -52,6 +54,12 @@ public class WebController {
 	@GetMapping(path = "/dealing")
 	public ModelAndView dealing(){
 		return new ModelAndView("pages/dealing/dealing");
+	}
+	
+	@PreAuthorize("hasAnyAuthority('TR006')")
+	@GetMapping(path = "/interface")
+	public ModelAndView _interface(){
+		return new ModelAndView("pages/interface/interface");
 	}
 	
 }

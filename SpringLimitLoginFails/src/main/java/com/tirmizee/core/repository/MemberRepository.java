@@ -10,6 +10,7 @@ public interface MemberRepository extends JdbcRepository<Member, String>{
 	public static final String COL_PASSWORD = "password";
 	public static final String COL_FKROLEID = "fkRoleId";
 	public static final String COL_FKIMGID = "fkMemberImgId";
+	public static final String COL_FKSKINID = "fkSkinId";
 	public static final String COL_EMAIL = "email";
 	public static final String COL_ENABLED = "enabled";
 	public static final String COL_ACCOUNTNONLOCKED = "accountNonLocked";
@@ -25,6 +26,7 @@ public interface MemberRepository extends JdbcRepository<Member, String>{
 	public static final String PASSWORD = "Member.password";
 	public static final String FKROLEID = "Member.fkRoleId";
 	public static final String FKIMGID = "Member.fkMemberImgId";
+	public static final String FKSKINID = "Member.fkSkinId";
 	public static final String ENABLED = "Member.enabled";
 	public static final String ACCOUNTNONLOCKED = "Member.accountNonLocked";
 	public static final String ACCOUNTNONEXPIRED = "Member.accountNonExpired";

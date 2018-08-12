@@ -1,5 +1,7 @@
 var AjaxManager = function(){
 	
+	var rootUrl = $("meta[name='rootUrl']").attr("content");
+	
 	var token = $("meta[name='_csrf']").attr("content");
 
 	var header = $("meta[name='_csrf_header']").attr("content");
@@ -86,7 +88,8 @@ var AjaxManager = function(){
     	DeleteData : DeleteData,
     	UploadData : UploadData,
     	CsrfHeader : header,
-    	CsrfToken  : token
+    	CsrfToken  : token,
+    	RootUrl    : rootUrl
     };
 }();
 
